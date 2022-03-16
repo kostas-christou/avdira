@@ -140,7 +140,7 @@ input {
 .home-container-right {
   width: 87.5%;
   margin-left: auto;
-  padding-block: var(--pad-block-medium);
+  padding-bottom: var(--pad-block-medium);
 }
 
 /* utility classes end */
@@ -239,7 +239,7 @@ input {
   align-items: baseline;
   gap: 2rem;
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 4rem;
   position: relative;
 }
 .intro__title {
@@ -304,7 +304,7 @@ input {
 }
 .hero-card__content-box {
   margin-bottom: 2rem;
-  max-height: 11rem;
+  max-height: 12rem;
   overflow: hidden;
   transition: max-height 1s ease;
   position: relative;
@@ -319,7 +319,7 @@ input {
 }
 .hero-card__text {
   max-width: 40ch;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   animation: textSlideOut 1s ease forwards;
 }
 .hero-card__decoration {
@@ -378,7 +378,7 @@ input {
   animation: titleSlideOut 1s ease forwards;
 }
 .welcome-card__text {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   animation: textSlideOut 1s ease forwards;
 }
 .welcome-card__link {
@@ -412,7 +412,6 @@ input {
 /* welcome-card end */
 /* news-card start */
 .news-card {
-  min-width: 17rem;
   position: relative;
 }
 .news-card__img-container {
@@ -467,9 +466,7 @@ input {
 /* cards end */
 /* video start */
 .video {
-  margin: 0 auto;
   position: relative;
-  min-height: 28.125rem;
 }
 .video__overlay {
   position: absolute;
@@ -484,13 +481,16 @@ input {
   z-index: 1;
 }
 .video__play-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 7rem;
   aspect-ratio: 1;
-  background-image: url("../assets/icons/play_btn_circle_h.svg");
+  background-image: url("../assets/icons/play_button_bg.svg");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -499,15 +499,15 @@ input {
   transition: background-image 0.25s ease;
 }
 .video__play-btn-container:hover {
-  background-image: url("../assets/icons/play_button_h.svg");
+  background-image: url("../assets/icons/play_button_bg_h.svg");
+}
+.video__play-btn-container:hover svg {
+  fill: var(--color-primary);
 }
 .video iframe {
   display: block;
   width: 100%;
-  height: 100%;
-  min-height: 28.125rem;
-  object-fit: contain;
-  object-position: center;
+  aspect-ratio: 4/2;
   position: relative;
 }
 
@@ -515,7 +515,6 @@ input {
 /* calendar start */
 .calendar {
   max-width: fit-content;
-  margin: 0 auto;
 }
 .calendar__header {
   background-color: var(--color-primary);
@@ -565,6 +564,28 @@ input {
 }
 
 /* calendar end */
+/* Swiper slider buttons start */
+.slider-btn-next,
+.slider-btn-prev {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+  cursor: pointer;
+}
+.slider-btn-next.swiper-button-disabled,
+.slider-btn-prev.swiper-button-disabled {
+  display: none;
+}
+
+.slider-btn-prev svg {
+  transform: rotate(180deg);
+}
+
+/* Swiper slider buttons end */
 /* components end */
 /* Card animation */
 @keyframes textSlideIn {
@@ -676,18 +697,16 @@ input {
   align-items: center;
   gap: 4rem;
   width: 100%;
-  margin-top: 4rem;
 }
 
 /* Welcome section end */
 /* News section start */
-.news__card-wrapper {
+.news__content-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 3rem;
-  margin-top: 4rem;
 }
 
 /* News section end */
@@ -695,62 +714,79 @@ input {
 .meetings__intro-wrapper {
   padding-bottom: 0;
 }
-.meetings__content-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  gap: 3rem;
-}
-.meetings__video {
-  width: 60%;
-}
 .meetings__slider {
-  width: 30%;
-  min-height: 28.125rem;
   position: relative;
   overflow: hidden;
 }
-.meetings__slider-img-wrapper {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
-.meetings__slider-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.meetings__slider-btn-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6rem;
+.meetings__swiper-button-prev, .meetings__swiper-button-next {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
   z-index: 1;
 }
-.meetings__swiper-button-next, .meetings__swiper-button-prev {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 4rem;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background-color: var(--color-secondary);
-  cursor: pointer;
+.meetings__swiper-button-prev {
+  left: 3rem;
 }
-.meetings__swiper-button-next.swiper-button-disabled, .meetings__swiper-button-prev.swiper-button-disabled {
-  display: none;
-}
-.meetings__swiper-button-prev svg {
-  transform: rotate(180deg);
+.meetings__swiper-button-next {
+  right: 3rem;
 }
 
 /* Meetings section end */
+/* Events section start */
+.events__content-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.events__calendar {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.events__img-wrapper {
+  margin-left: -3rem;
+  min-height: 30rem;
+  width: 100%;
+  background-image: url("../assets/images/events_calendar.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.events__link {
+  position: absolute;
+  bottom: 6rem;
+  left: 15%;
+}
+
+/* Events section end */
+/* Quick-access section start */
+.quick-access__swiper {
+  position: relative;
+}
+.quick-access__slider-card {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.quick-access__slider-card img {
+  width: 100%;
+}
+.quick-access__swiper-button-prev, .quick-access__swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.quick-access__swiper-button-prev {
+  left: 3rem;
+}
+.quick-access__swiper-button-next {
+  right: 3rem;
+}
+
+/* Quick-access section end */
 
 /*# sourceMappingURL=style.css.map */

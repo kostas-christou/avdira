@@ -47,7 +47,6 @@
     gap: 4rem;
 
     width: 100%;
-    margin-top: 4rem;
   }
 }
 /* Welcome section end */
@@ -56,14 +55,12 @@
 .news {
   // padding-block: var(--pad-block-medium);
 
-  &__card-wrapper {
+  &__content-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 3rem;
-
-    margin-top: 4rem;
   }
 }
 /* News section end */
@@ -74,75 +71,100 @@
     padding-bottom: 0;
   }
 
-  &__content-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 3rem;
-  }
-
-  &__video {
-    width: 60%;
-    // min-height: 28.125rem;
-  }
-
   &__slider {
-    width: 30%;
-    min-height: 28.125rem;
-
     position: relative;
     overflow: hidden;
   }
 
-  &__slider-img-wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-  }
-
-  &__slider-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  &__slider-btn-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6rem;
-
+  &__swiper-button-prev,
+  &__swiper-button-next {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
 
     z-index: 1;
   }
 
-  &__swiper-button-next,
   &__swiper-button-prev {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 4rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background-color: var(--color-secondary);
-
-    cursor: pointer;
-
-    &.swiper-button-disabled {
-      display: none;
-    }
+    left: 3rem;
   }
 
-  &__swiper-button-prev svg {
-    transform: rotate(180deg);
+  &__swiper-button-next {
+    right: 3rem;
   }
 }
 /* Meetings section end */
+
+/* Events section start */
+.events {
+  &__content-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__calendar {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__img-wrapper {
+    margin-left: -3rem;
+    min-height: 30rem;
+    width: 100%;
+
+    background-image: url('../assets/images/events_calendar.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: relative;
+  }
+
+  &__link {
+    position: absolute;
+    bottom: 6rem;
+    left: 15%;
+  }
+}
+/* Events section end */
+
+/* Quick-access section start */
+.quick-access {
+  &__swiper {
+    position: relative;
+  }
+
+  &__slider-card {
+    height: 100%;
+    width: 100%;
+
+    overflow: hidden;
+
+    & img {
+      width: 100%;
+    }
+  }
+
+  &__swiper-button-prev,
+  &__swiper-button-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    z-index: 1;
+  }
+
+  &__swiper-button-prev {
+    left: 3rem;
+  }
+
+  &__swiper-button-next {
+    right: 3rem;
+  }
+}
+/* Quick-access section end */

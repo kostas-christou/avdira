@@ -28,10 +28,21 @@ if (document.getElementById('color-calendar')) {
 
 // Swiper (slider) config
 const meetingsSwiper = new Swiper('.meetings__swiper', {
-  slidesPerView: 1,
+  slidesPerView: 1.4,
+  spaceBetween: 60,
   grabCursor: true,
   navigation: {
     nextEl: '.meetings__swiper-button-next',
     prevEl: '.meetings__swiper-button-prev',
+  },
+});
+
+const quickAccessSwiper = new Swiper('.quick-access__swiper', {
+  slidesPerView: 2.4,
+  spaceBetween: 40,
+  grabCursor: true,
+  navigation: {
+    nextEl: '.quick-access__swiper-button-next',
+    prevEl: '.quick-access__swiper-button-prev',
   },
 });

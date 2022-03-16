@@ -1,0 +1,40 @@
+/* Home page general layout start */
+.header {
+  position: fixed;
+  inset: 0;
+  height: var(--header-height);
+
+  background-color: cadetblue;
+  opacity: 0.5;
+
+  z-index: 100;
+}
+
+.aside {
+  position: fixed;
+  top: var(--header-height);
+
+  height: calc(100vh - var(--header-height));
+  width: var(--header-height);
+
+  opacity: 0.5;
+
+  &--left {
+    left: 0;
+    background-color: darkgoldenrod;
+  }
+
+  &--right {
+    right: 0;
+    background-color: brown;
+  }
+}
+
+.parallax-wrapper {
+  width: calc(100% - (var(--header-height) * 2));
+  height: 200vh;
+
+  //   padding-top: var(--header-height);
+  margin-left: var(--header-height);
+}
+/* Home page general layout end */

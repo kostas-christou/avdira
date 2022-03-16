@@ -140,7 +140,7 @@ input {
 .home-container-right {
   width: 87.5%;
   margin-left: auto;
-  padding-bottom: var(--pad-block-medium);
+  margin-bottom: var(--pad-block-medium);
 }
 
 /* utility classes end */
@@ -586,6 +586,14 @@ input {
 }
 
 /* Swiper slider buttons end */
+/* Footer separator start */
+.footer-separator {
+  display: flex;
+  align-items: baseline;
+  padding-block: 0 3rem;
+}
+
+/* Footer separator end */
 /* components end */
 /* Card animation */
 @keyframes textSlideIn {

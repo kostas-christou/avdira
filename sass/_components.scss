@@ -490,9 +490,6 @@
     width: 100%;
     aspect-ratio: 4 / 2;
 
-    // object-fit: contain;
-    // object-position: center;
-
     position: relative;
   }
 }
@@ -599,5 +596,14 @@
   transform: rotate(180deg);
 }
 /* Swiper slider buttons end */
+
+/* Footer separator start */
+.footer-separator {
+  display: flex;
+  align-items: baseline;
+
+  padding-block: 0 3rem;
+}
+/* Footer separator end */
 
 /* components end */

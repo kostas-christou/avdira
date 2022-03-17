@@ -1,5 +1,17 @@
 const videoOverlayBtn = document.querySelector('.video__play-btn-container');
 
+// Hamburger menu listener
+const hamMenu = document.querySelector('.header__ham-menu');
+hamMenu.addEventListener('click', () => {
+  if (hamMenu.classList.contains('header__ham-menu--open')) {
+    hamMenu.classList.remove('header__ham-menu--open');
+    hamMenu.classList.add('header__ham-menu--close');
+  } else {
+    hamMenu.classList.remove('header__ham-menu--close');
+    hamMenu.classList.add('header__ham-menu--open');
+  }
+});
+
 // Hide video overlay on click
 if (videoOverlayBtn) {
   videoOverlayBtn.addEventListener('click', () => {

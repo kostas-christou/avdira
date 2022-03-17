@@ -634,11 +634,15 @@ input {
 
 /* Footer separator end */
 /* components end */
+/* Hamburger menu animation */
 /* Card animation */
 @keyframes textSlideIn {
   0% {
     opacity: 0;
     transform: translateY(200%);
+  }
+  40% {
+    opacity: 0.6;
   }
   100% {
     opacity: 1;
@@ -738,11 +742,12 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 .header__icon-item {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .header__icon-item svg {
   fill: var(--color-primary);
@@ -750,28 +755,59 @@ input {
 .header__search svg {
   stroke: var(--color-primary);
 }
-.header__ham-menu-open {
+.header__weather p {
+  margin-left: 0.25rem;
+  font-size: 0.875rem;
+}
+.header__ham-menu {
   display: flex;
   justify-content: center;
   align-items: center;
   width: var(--header-height);
   aspect-ratio: 1;
   background-color: var(--color-primary);
+  cursor: pointer;
 }
-.header__ham-menu-open .line-center, .header__ham-menu-open .line-top, .header__ham-menu-open .line-bottom {
+.header__ham-menu .line-center, .header__ham-menu .line-center::before, .header__ham-menu .line-center::after {
   height: 3px;
   background-color: var(--color-white);
-  transform-origin: center center;
-  transition: all 0.5s ease-in-out;
+  transform-origin: center;
+  transition: all 0.35s ease-in-out;
 }
-.header__ham-menu-open .line-center .line-center, .header__ham-menu-open .line-top .line-center, .header__ham-menu-open .line-bottom .line-center {
-  width: 20%;
+.header__ham-menu .line-center {
+  width: 30%;
+  position: relative;
 }
-.header__ham-menu-open:hover .line-center {
-  transform: scaleX(2);
+.header__ham-menu .line-center::before, .header__ham-menu .line-center::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 150%;
+  transform: translateX(-50%);
 }
-.header__ham-menu-open:hover .line-center::before, .header__ham-menu-open:hover .line-center::after {
-  transform: translateX(-50%) scaleX(0.35);
+.header__ham-menu .line-center::before {
+  top: -0.75rem;
+}
+.header__ham-menu .line-center::after {
+  bottom: -0.75rem;
+}
+.header__ham-menu--open:hover .line-center {
+  transform: scaleX(1.25);
+}
+.header__ham-menu--open:hover .line-center::before, .header__ham-menu--open:hover .line-center::after {
+  transform: translateX(-50%) scaleX(0.45);
+}
+.header__ham-menu--close .line-center {
+  width: 50%;
+  transform: rotate(-45deg);
+}
+.header__ham-menu--close .line-center::before {
+  display: none;
+}
+.header__ham-menu--close .line-center::after {
+  width: 100%;
+  bottom: 0;
+  transform: translateX(-50%) rotate(90deg);
 }
 
 /* Header end */

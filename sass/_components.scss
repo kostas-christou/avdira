@@ -19,13 +19,13 @@
 
   & span {
     position: relative;
-    z-index: 2;
+    z-index: 20;
   }
 
   & svg {
     margin-left: 1em;
     position: relative;
-    z-index: 2;
+    z-index: 20;
 
     transition: transform 0.5s ease;
   }
@@ -37,7 +37,7 @@
     border-radius: 100vh;
 
     transform-origin: right;
-    z-index: 1;
+    z-index: 10;
     transition: inset 0.5s ease, background-color 0.5s ease;
   }
 
@@ -130,6 +130,9 @@
     flex-basis: max-content;
 
     margin-left: 2rem;
+
+    position: relative;
+    z-index: 20;
   }
 
   &__start-dec {
@@ -146,7 +149,7 @@
     object-position: center;
     background-repeat: no-repeat;
 
-    z-index: -1;
+    z-index: 10;
   }
 
   &__end-dec {
@@ -158,6 +161,9 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+
+    position: relative;
+    z-index: 20;
   }
 
   &__line {
@@ -200,7 +206,6 @@
 
 /* hero-card start */
 .hero-card {
-  // width: 25rem;
   padding: 2rem;
 
   position: relative;
@@ -212,7 +217,7 @@
     transition: max-height 1s ease;
 
     position: relative;
-    z-index: 1;
+    z-index: 9;
   }
 
   &__title {
@@ -247,7 +252,7 @@
     }
   }
 
-  /* Applying different styles */
+  /* Applying different styles to hero-card */
   &--primary {
     background-color: var(--color-primary);
 
@@ -299,7 +304,7 @@
     margin-bottom: 1rem;
     overflow: hidden;
 
-    z-index: 2;
+    z-index: 20;
   }
 
   &__title {
@@ -313,7 +318,7 @@
   }
 
   &__link {
-    z-index: 2;
+    z-index: 20;
   }
 
   &__overlay {
@@ -321,7 +326,7 @@
     inset: 0;
 
     opacity: 0.8;
-    z-index: 1;
+    z-index: 10;
   }
 
   &:hover {
@@ -362,9 +367,6 @@
 
 /* news-card start */
 .news-card {
-  // min-width: 17rem;
-  // min-height: 20rem;
-
   position: relative;
 
   &__img-container {
@@ -391,6 +393,8 @@
 
     padding: 0.5rem;
     background-color: var(--color-white);
+
+    z-index: 20;
   }
 
   &__title {
@@ -434,9 +438,7 @@
 
 /* video start */
 .video {
-  // margin: 0 auto;
   position: relative;
-  // min-height: 28.125rem;
 
   &__overlay {
     position: absolute;
@@ -450,7 +452,7 @@
       object-position: center;
 
       position: relative;
-      z-index: 1;
+      z-index: 10;
     }
   }
 
@@ -472,7 +474,7 @@
     background-position: center;
 
     cursor: pointer;
-    z-index: 3;
+    z-index: 30;
     transition: background-image 0.25s ease;
 
     &:hover {
@@ -498,9 +500,6 @@
 /* calendar start */
 .calendar {
   max-width: fit-content;
-  // width: 40vw;
-
-  // margin: 0 auto;
 
   &__header {
     background-color: var(--color-primary);
@@ -544,15 +543,6 @@
 
   &__day-active {
   }
-
-  // &__day-today > .calendar__day-bullet {
-  //   width: 0.35em;
-  //   aspect-ratio: 1;
-  //   border-radius: 50%;
-  //   margin-left: 0.25em;
-  //   background-color: var(--color-white) !important;
-  //   // border-radius: 50%;
-  // }
 
   &__day-today > .calendar__day-box {
     background-color: var(--color-white) !important;

@@ -30,11 +30,24 @@
   }
 }
 
-.parallax-wrapper {
-  width: calc(100% - (var(--header-height) * 2));
-  height: 200vh;
+.main {
+  // position: relative;
+  // z-index: 2;
 
-  //   padding-top: var(--header-height);
-  margin-left: var(--header-height);
+  // background-color: var(--color-white);
 }
+
+.parallax-wrapper {
+  height: 100%;
+  width: calc(100% - (var(--header-height) * 2));
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  // perspective: 100px;
+
+  margin: 0 auto;
+
+  position: relative;
+}
+
 /* Home page general layout end */

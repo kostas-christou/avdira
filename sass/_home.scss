@@ -7,7 +7,7 @@
 
   &__background-container {
     width: 100%;
-    height: 80vh;
+    height: 75vh;
     padding-top: var(--header-height);
 
     background-image: url('../assets/images/archaiologikos_avdira.jpg');
@@ -30,6 +30,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: flex-end;
+
+    z-index: 5;
   }
 }
 /* Hero section end */
@@ -82,7 +84,7 @@
     top: 50%;
     transform: translateY(-50%);
 
-    z-index: 1;
+    z-index: 10;
   }
 
   &__swiper-button-prev {
@@ -108,7 +110,7 @@
   &__calendar {
     flex-shrink: 0;
     position: relative;
-    z-index: 1;
+    z-index: 10;
   }
 
   &__img-wrapper {
@@ -156,7 +158,7 @@
     top: 50%;
     transform: translateY(-50%);
 
-    z-index: 1;
+    z-index: 10;
   }
 
   &__swiper-button-prev {
@@ -168,3 +170,94 @@
   }
 }
 /* Quick-access section end */
+
+/* Footer start */
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 1rem;
+
+  min-height: 40vh;
+  padding: 3rem 3rem 1rem;
+  background-color: var(--color-primary);
+
+  &__logo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__logo-title {
+    font-size: 1.5rem;
+    color: var(--color-white);
+  }
+
+  &__nav {
+    height: 20rem;
+  }
+
+  &__link-list {
+    display: grid;
+    grid-template-areas:
+      'useful contact about social'
+      'policy policy policy policy';
+
+    height: 100%;
+    column-gap: 4rem;
+  }
+
+  &__useful {
+    grid-area: useful;
+  }
+
+  &__contact {
+    grid-area: contact;
+  }
+
+  &__about {
+    grid-area: about;
+  }
+
+  &__social {
+    grid-area: social;
+  }
+
+  &__policy {
+    grid-area: policy;
+    align-self: end;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+
+    margin-left: 1rem;
+  }
+
+  &__list-item:not(:last-child) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+
+    margin-left: 1rem;
+  }
+
+  &__item-title {
+    margin-bottom: 1.5rem;
+    font-family: var(--ff-roboto-slab);
+    font-weight: 700;
+    color: var(--color-white);
+  }
+
+  &__link {
+    color: var(--color-white);
+  }
+}
+/* Footer end */

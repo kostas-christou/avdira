@@ -144,6 +144,42 @@ input {
 }
 
 /* utility classes end */
+/* Home page general layout start */
+.header {
+  position: fixed;
+  inset: 0;
+  height: var(--header-height);
+  background-color: cadetblue;
+  opacity: 0.5;
+  z-index: 100;
+}
+
+.aside {
+  position: fixed;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  width: var(--header-height);
+  opacity: 0.5;
+}
+.aside--left {
+  left: 0;
+  background-color: darkgoldenrod;
+}
+.aside--right {
+  right: 0;
+  background-color: brown;
+}
+
+.parallax-wrapper {
+  height: 100%;
+  width: calc(100% - var(--header-height) * 2);
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Home page general layout end */
 /* components start */
 /* buttons start */
 /* sliding-button start */
@@ -161,12 +197,12 @@ input {
 }
 .btn-sliding span {
   position: relative;
-  z-index: 2;
+  z-index: 20;
 }
 .btn-sliding svg {
   margin-left: 1em;
   position: relative;
-  z-index: 2;
+  z-index: 20;
   transition: transform 0.5s ease;
 }
 .btn-sliding__overlay {
@@ -174,7 +210,7 @@ input {
   inset: -1px;
   border-radius: 100vh;
   transform-origin: right;
-  z-index: 1;
+  z-index: 10;
   transition: inset 0.5s ease, background-color 0.5s ease;
 }
 .btn-sliding:hover svg {
@@ -245,6 +281,8 @@ input {
 .intro__title {
   flex-basis: max-content;
   margin-left: 2rem;
+  position: relative;
+  z-index: 20;
 }
 .intro__start-dec {
   position: absolute;
@@ -257,7 +295,7 @@ input {
   background-size: contain;
   object-position: center;
   background-repeat: no-repeat;
-  z-index: -1;
+  z-index: 10;
 }
 .intro__end-dec {
   flex-shrink: 1;
@@ -266,6 +304,8 @@ input {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  position: relative;
+  z-index: 20;
 }
 .intro__line {
   height: 2px;
@@ -300,7 +340,7 @@ input {
 .hero-card {
   padding: 2rem;
   position: relative;
-  /* Applying different styles */
+  /* Applying different styles to hero-card */
 }
 .hero-card__content-box {
   margin-bottom: 2rem;
@@ -308,7 +348,7 @@ input {
   overflow: hidden;
   transition: max-height 1s ease;
   position: relative;
-  z-index: 1;
+  z-index: 9;
 }
 .hero-card__title {
   max-width: 12ch;
@@ -371,7 +411,7 @@ input {
 .welcome-card__content-box {
   margin-bottom: 1rem;
   overflow: hidden;
-  z-index: 2;
+  z-index: 20;
 }
 .welcome-card__title {
   margin-bottom: 3rem;
@@ -382,13 +422,13 @@ input {
   animation: textSlideOut 1s ease forwards;
 }
 .welcome-card__link {
-  z-index: 2;
+  z-index: 20;
 }
 .welcome-card__overlay {
   position: absolute;
   inset: 0;
   opacity: 0.8;
-  z-index: 1;
+  z-index: 10;
 }
 .welcome-card:hover .welcome-card__title {
   animation: titleSlideIn 0.75s ease forwards;
@@ -433,6 +473,7 @@ input {
   left: 0;
   padding: 0.5rem;
   background-color: var(--color-white);
+  z-index: 20;
 }
 .news-card__title {
   margin-bottom: 2rem;
@@ -478,7 +519,7 @@ input {
   object-fit: cover;
   object-position: center;
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 .video__play-btn-container {
   display: flex;
@@ -495,7 +536,7 @@ input {
   background-size: contain;
   background-position: center;
   cursor: pointer;
-  z-index: 3;
+  z-index: 30;
   transition: background-image 0.25s ease;
 }
 .video__play-btn-container:hover {
@@ -636,39 +677,6 @@ input {
     transform: translateY(8rem);
   }
 }
-/* Home page general layout start */
-.header {
-  position: fixed;
-  inset: 0;
-  height: var(--header-height);
-  background-color: cadetblue;
-  opacity: 0.5;
-  z-index: 100;
-}
-
-.aside {
-  position: fixed;
-  top: var(--header-height);
-  height: calc(100vh - var(--header-height));
-  width: var(--header-height);
-  opacity: 0.5;
-}
-.aside--left {
-  left: 0;
-  background-color: darkgoldenrod;
-}
-.aside--right {
-  right: 0;
-  background-color: brown;
-}
-
-.parallax-wrapper {
-  width: calc(100% - var(--header-height) * 2);
-  height: 200vh;
-  margin-left: var(--header-height);
-}
-
-/* Home page general layout end */
 /* Hero section start */
 .hero {
   width: 100%;
@@ -677,7 +685,7 @@ input {
 }
 .hero__background-container {
   width: 100%;
-  height: 80vh;
+  height: 75vh;
   padding-top: var(--header-height);
   background-image: url("../assets/images/archaiologikos_avdira.jpg");
   background-size: cover;
@@ -694,6 +702,7 @@ input {
   flex-direction: row;
   justify-content: center;
   align-items: flex-end;
+  z-index: 5;
 }
 
 /* Hero section end */
@@ -730,7 +739,7 @@ input {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1;
+  z-index: 10;
 }
 .meetings__swiper-button-prev {
   left: 3rem;
@@ -751,7 +760,7 @@ input {
 .events__calendar {
   flex-shrink: 0;
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 .events__img-wrapper {
   margin-left: -3rem;
@@ -786,7 +795,7 @@ input {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1;
+  z-index: 10;
 }
 .quick-access__swiper-button-prev {
   left: 3rem;
@@ -796,5 +805,76 @@ input {
 }
 
 /* Quick-access section end */
+/* Footer start */
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 1rem;
+  min-height: 40vh;
+  padding: 3rem 3rem 1rem;
+  background-color: var(--color-primary);
+}
+.footer__logo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.footer__logo-title {
+  font-size: 1.5rem;
+  color: var(--color-white);
+}
+.footer__nav {
+  height: 20rem;
+}
+.footer__link-list {
+  display: grid;
+  grid-template-areas: "useful contact about social" "policy policy policy policy";
+  height: 100%;
+  column-gap: 4rem;
+}
+.footer__useful {
+  grid-area: useful;
+}
+.footer__contact {
+  grid-area: contact;
+}
+.footer__about {
+  grid-area: about;
+}
+.footer__social {
+  grid-area: social;
+}
+.footer__policy {
+  grid-area: policy;
+  align-self: end;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: 1rem;
+}
+.footer__list-item:not(:last-child) {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+.footer__item-title {
+  margin-bottom: 1.5rem;
+  font-family: var(--ff-roboto-slab);
+  font-weight: 700;
+  color: var(--color-white);
+}
+.footer__link {
+  color: var(--color-white);
+}
+
+/* Footer end */
 
 /*# sourceMappingURL=style.css.map */

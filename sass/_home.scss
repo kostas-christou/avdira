@@ -504,7 +504,13 @@
   }
 
   &__link {
+    padding: 0.25rem;
     color: var(--color-white);
+
+    &:hover {
+      border-radius: 1px;
+      background-color: var(--color-primary-extra-light);
+    }
   }
 }
 /* Footer end */

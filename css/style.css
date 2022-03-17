@@ -2,6 +2,7 @@
   /* Color CSS variables */
   --color-secondary: #b2f0e5;
   --color-primary: #07116b;
+  --color-primary-extra-light: #5960a748;
   --color-bg: #e5e5e5;
   --color-bg-dark: #f8f8f8;
   --color-grey: #999999;
@@ -1006,7 +1007,12 @@ input {
   color: var(--color-white);
 }
 .footer__link {
+  padding: 0.25rem;
   color: var(--color-white);
+}
+.footer__link:hover {
+  border-radius: 1px;
+  background-color: var(--color-primary-extra-light);
 }
 
 /* Footer end */

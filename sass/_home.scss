@@ -1,3 +1,145 @@
+/* Header start */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding-block: 1rem;
+
+  background-color: var(--color-white);
+
+  &__logo-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    width: fit-content;
+    margin-left: 0.5rem;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 5rem;
+    aspect-ratio: 1;
+    background-image: url('../assets/icons/logo_background.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &__logo-title {
+    font-size: 1.5rem;
+  }
+
+  &__nav-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__nav-link {
+    padding: 0.5em;
+    font-family: var(--ff-roboto-slab);
+    font-weight: 600;
+
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+
+      background-color: var(--color-secondary);
+      transform: translateX(-50%) scaleX(0);
+      transform-origin: center;
+
+      z-index: -1;
+
+      transition: transform 0.35s ease-in-out;
+    }
+
+    &:hover {
+      &::before {
+        transform: translateX(-50%) scaleX(1);
+      }
+    }
+  }
+
+  &__icon-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__icon-item {
+    display: flex;
+    align-items: center;
+    & svg {
+      fill: var(--color-primary);
+    }
+  }
+
+  &__search {
+    & svg {
+      stroke: var(--color-primary);
+    }
+  }
+
+  &__weather {
+  }
+
+  &__map {
+  }
+
+  &__ham-menu-open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: var(--header-height);
+    aspect-ratio: 1;
+    background-color: var(--color-primary);
+
+    & .line-center,
+    & .line-top,
+    & .line-bottom {
+      height: 3px;
+
+      background-color: var(--color-white);
+      transform-origin: center center;
+
+      transition: all 0.5s ease-in-out;
+
+      & .line-center {
+        width: 20%;
+      }
+
+      & .line-top,
+      & .line-bottom {
+      }
+    }
+
+    &:hover .line-center {
+      transform: scaleX(2);
+
+      &::before,
+      &::after {
+        transform: translateX(-50%) scaleX(0.35);
+      }
+    }
+  }
+}
+/* Header end */
+
 /* Hero section start */
 .hero {
   width: 100%;

@@ -67,8 +67,19 @@ if (document.getElementById('color-calendar')) {
 }
 
 //// Playing with calendar
-const calendarDay = document.activeElement('calendar__day-selected');
-console.log(calendarDay);
+
+const calendarBody = document.querySelector('.calendar__body');
+calendarBody.addEventListener('click', (e) => {
+  const calendarDay = document.querySelector('.calendar__day-selected');
+  const calendarHeader =
+    calendarDay.parentElement.parentElement.previousElementSibling;
+  const calendarMonth = calendarHeader.querySelector('.calendar__month');
+  const calendarYear = calendarHeader.querySelector('.calendar__year');
+  let day = calendarDay.firstElementChild.textContent;
+  let month = calendarMonth.textContent;
+  let year = calendarYear.textContent;
+  console.log(`See all events on ${day}/${month}/${year}`);
+});
 
 // Swiper (slider) config
 const meetingsSwiper = new Swiper('.meetings__swiper', {

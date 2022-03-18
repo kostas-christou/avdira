@@ -477,6 +477,10 @@
     z-index: 30;
     transition: background-image 0.25s ease;
 
+    & svg {
+      pointer-events: none;
+    }
+
     &:hover {
       background-image: url('../assets/icons/play_button_bg_h.svg');
 
@@ -595,5 +599,25 @@
   padding-block: 0 3rem;
 }
 /* Footer separator end */
+
+/* Back-to-top button start */
+.back-to-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: var(--header-height);
+  aspect-ratio: 1;
+
+  background-color: var(--color-secondary);
+
+  cursor: pointer;
+  z-index: 100;
+}
+
+/* Back-to-top button end */
 
 /* components end */

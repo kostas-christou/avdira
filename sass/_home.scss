@@ -23,7 +23,7 @@
     justify-content: center;
     align-items: center;
 
-    width: 5rem;
+    width: var(--header-height);
     aspect-ratio: 1;
     background-image: url('../assets/icons/logo_background.svg');
     background-size: contain;
@@ -106,70 +106,6 @@
   &__map {
   }
 
-  // &__ham-menu {
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   align-items: center;
-
-  //   width: var(--header-height);
-  //   aspect-ratio: 1;
-  //   background-color: var(--color-primary);
-
-  //   cursor: pointer;
-
-  //   & .line-center,
-  //   & .line-top,
-  //   & .line-bottom {
-  //     height: 3px;
-
-  //     background-color: var(--color-white);
-  //     transform-origin: center center;
-
-  //     transition: all 0.25s ease-in-out;
-  //   }
-
-  //   &--open {
-  //     & .line-center {
-  //       width: 30%;
-  //       margin-block: 0.75rem;
-  //     }
-
-  //     & .line-top,
-  //     & .line-bottom {
-  //       width: 45%;
-  //     }
-
-  //     &:hover .line-center {
-  //       transform: scaleX(1.6);
-  //     }
-
-  //     &:hover .line-top,
-  //     &:hover .line-bottom {
-  //       transform: scaleX(0.65);
-  //     }
-  //   }
-
-  //   &--close {
-  //     & .line-center {
-  //       display: none;
-  //     }
-
-  //     & .line-top,
-  //     & .line-bottom {
-  //       width: 50%;
-  //     }
-
-  //     & .line-top {
-  //       transform: translateY(200%);
-  //     }
-
-  //     & .line-bottom {
-  //       transform: translateY(-200%);
-  //     }
-  //   }
-  // }
-
   &__ham-menu {
     display: flex;
     justify-content: center;
@@ -244,6 +180,164 @@
   }
 }
 /* Header end */
+
+/* Expandable menu start */
+.full-menu {
+  display: flex;
+  flex-direction: row;
+
+  position: fixed;
+  top: var(--header-height);
+  bottom: 0;
+
+  right: var(--header-height);
+  padding-top: 10vh;
+
+  transition: transform 0.5s ease-in-out;
+  z-index: 99;
+
+  &--left {
+    left: 0;
+    width: calc(((100% - var(--header-height)) * 0.75));
+
+    justify-content: space-around;
+    background-color: var(--color-secondary);
+
+    & .full-menu__link::before {
+      background-color: var(--color-primary);
+    }
+  }
+
+  &--right {
+    right: var(--header-height);
+    width: calc(((100% - var(--header-height)) * 0.25));
+
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+
+    & .full-menu__link {
+      color: var(--color-white);
+
+      &::before {
+        background-color: var(--color-white);
+      }
+    }
+  }
+
+  &--collapse {
+    &.full-menu--left {
+      transform: translateY((calc(-100% - var(--header-height))));
+    }
+
+    &.full-menu--right {
+      transform: translateX((calc(100% + var(--header-height))));
+    }
+  }
+
+  &__services {
+  }
+
+  &__administration {
+  }
+
+  &__tourism {
+  }
+
+  &__participate {
+  }
+
+  &__list-title {
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__list-item {
+    font-weight: 400;
+  }
+
+  &__link {
+    padding: 0.25em 0;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease-in-out;
+    }
+
+    &:hover::before {
+      transform: scaleY(1);
+    }
+  }
+}
+/* Expandable menu end */
+
+/* Aside nav right start */
+.aside {
+  &__nav {
+  }
+
+  &__nav-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    margin-block: 1.5rem;
+  }
+
+  &__list-item {
+    width: fit-content;
+    cursor: pointer;
+  }
+
+  & svg {
+  }
+
+  & path {
+    fill: var(--color-primary);
+  }
+
+  & circle {
+    stroke: var(--color-primary);
+  }
+
+  &__language {
+  }
+
+  &__login {
+    margin-bottom: 10vh;
+  }
+
+  &__facebook {
+  }
+
+  &__instagram {
+  }
+
+  &__youtube {
+    margin-bottom: 20vh;
+  }
+
+  &__accessibility {
+  }
+}
+/* Aside nav right end */
 
 /* Hero section start */
 .hero {
@@ -506,6 +600,8 @@
   &__link {
     padding: 0.25rem;
     color: var(--color-white);
+
+    transition: background-color 0.25s ease-in-out;
 
     &:hover {
       border-radius: 1px;

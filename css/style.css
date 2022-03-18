@@ -24,7 +24,7 @@
   --pad-block-large: 9rem;
   --pad-block-xl: 15rem;
   /* Elements height */
-  --header-height: 6rem;
+  --header-height: 5rem;
 }
 
 /* global reset */
@@ -144,6 +144,11 @@ input {
   margin-bottom: var(--pad-block-medium);
 }
 
+.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
 /* utility classes end */
 /* Home page general layout start */
 .header {
@@ -158,15 +163,15 @@ input {
   top: var(--header-height);
   height: calc(100vh - var(--header-height));
   width: var(--header-height);
-  opacity: 0.5;
+  background-color: var(--color-white);
 }
 .aside--left {
   left: 0;
-  background-color: darkgoldenrod;
+  z-index: 80;
 }
 .aside--right {
   right: 0;
-  background-color: brown;
+  z-index: 100;
 }
 
 .parallax-wrapper {
@@ -538,6 +543,9 @@ input {
   z-index: 30;
   transition: background-image 0.25s ease;
 }
+.video__play-btn-container svg {
+  pointer-events: none;
+}
 .video__play-btn-container:hover {
   background-image: url("../assets/icons/play_button_bg_h.svg");
 }
@@ -634,6 +642,22 @@ input {
 }
 
 /* Footer separator end */
+/* Back-to-top button start */
+.back-to-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: var(--header-height);
+  aspect-ratio: 1;
+  background-color: var(--color-secondary);
+  cursor: pointer;
+  z-index: 100;
+}
+
+/* Back-to-top button end */
 /* components end */
 /* Hamburger menu animation */
 /* Card animation */
@@ -701,7 +725,7 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 5rem;
+  width: var(--header-height);
   aspect-ratio: 1;
   background-image: url("../assets/icons/logo_background.svg");
   background-size: contain;
@@ -812,6 +836,104 @@ input {
 }
 
 /* Header end */
+/* Expandable menu start */
+.full-menu {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: var(--header-height);
+  bottom: 0;
+  right: var(--header-height);
+  padding-top: 10vh;
+  transition: transform 0.5s ease-in-out;
+  z-index: 99;
+}
+.full-menu--left {
+  left: 0;
+  width: calc((100% - var(--header-height)) * 0.75);
+  justify-content: space-around;
+  background-color: var(--color-secondary);
+}
+.full-menu--left .full-menu__link::before {
+  background-color: var(--color-primary);
+}
+.full-menu--right {
+  right: var(--header-height);
+  width: calc((100% - var(--header-height)) * 0.25);
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+.full-menu--right .full-menu__link {
+  color: var(--color-white);
+}
+.full-menu--right .full-menu__link::before {
+  background-color: var(--color-white);
+}
+.full-menu--collapse.full-menu--left {
+  transform: translateY(calc(-100% - var(--header-height)));
+}
+.full-menu--collapse.full-menu--right {
+  transform: translateX(calc(100% + var(--header-height)));
+}
+.full-menu__list-title {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+.full-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.full-menu__list-item {
+  font-weight: 400;
+}
+.full-menu__link {
+  padding: 0.25em 0;
+  position: relative;
+}
+.full-menu__link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s ease-in-out;
+}
+.full-menu__link:hover::before {
+  transform: scaleY(1);
+}
+
+/* Expandable menu end */
+/* Aside nav right start */
+.aside__nav-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-block: 1.5rem;
+}
+.aside__list-item {
+  width: fit-content;
+  cursor: pointer;
+}
+.aside path {
+  fill: var(--color-primary);
+}
+.aside circle {
+  stroke: var(--color-primary);
+}
+.aside__login {
+  margin-bottom: 10vh;
+}
+.aside__youtube {
+  margin-bottom: 20vh;
+}
+/* Aside nav right end */
 /* Hero section start */
 .hero {
   width: 100%;
@@ -1009,6 +1131,7 @@ input {
 .footer__link {
   padding: 0.25rem;
   color: var(--color-white);
+  transition: background-color 0.25s ease-in-out;
 }
 .footer__link:hover {
   border-radius: 1px;

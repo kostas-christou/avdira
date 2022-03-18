@@ -27,7 +27,7 @@
   --pad-block-xl: 15rem;
 
   /* Elements height */
-  --header-height: 6rem;
+  --header-height: 5rem;
 }
 
 /* global reset */
@@ -165,5 +165,10 @@ input {
   width: 87.5%;
   margin-left: auto;
   margin-bottom: var(--pad-block-medium);
+}
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
 }
 /* utility classes end */

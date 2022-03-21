@@ -167,6 +167,12 @@ input {
   margin-bottom: var(--pad-block-medium);
 }
 
+.home-container-left {
+  width: 87.5%;
+  margin-left: auto;
+  // padding-block: var(--pad-block-medium);
+}
+
 .hide {
   opacity: 0;
   visibility: hidden;

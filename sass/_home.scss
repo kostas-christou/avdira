@@ -35,6 +35,10 @@
     font-size: 1.5rem;
   }
 
+  &__nav {
+    margin: 0 auto;
+  }
+
   &__nav-list {
     display: flex;
     justify-content: space-between;
@@ -85,8 +89,23 @@
     align-items: center;
     cursor: pointer;
 
+    & p {
+      color: var(--color-primary);
+      // transition: color 0.25s ease-in-out;
+    }
+
     & svg {
       fill: var(--color-primary);
+      // transition: fill 0.25s ease-in-out, stroke 0.25s ease-in-out;
+    }
+
+    &:hover svg {
+      fill: var(--color-secondary);
+      stroke: var(--color-secondary);
+    }
+
+    &:hover p {
+      color: var(--color-secondary);
     }
   }
 
@@ -107,6 +126,8 @@
   }
 
   &__ham-menu {
+    flex-shrink: 0;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -188,20 +209,21 @@
 
   position: fixed;
   top: var(--header-height);
-  bottom: 0;
 
   right: var(--header-height);
   padding-top: 10vh;
 
   transition: transform 0.5s ease-in-out;
-  z-index: 99;
 
   &--left {
     left: 0;
+    bottom: 10%;
     width: calc(((100% - var(--header-height)) * 0.75));
 
     justify-content: space-around;
     background-color: var(--color-secondary);
+
+    z-index: 99;
 
     & .full-menu__link::before {
       background-color: var(--color-primary);
@@ -210,11 +232,23 @@
 
   &--right {
     right: var(--header-height);
-    width: calc(((100% - var(--header-height)) * 0.25));
+    bottom: 0;
+    width: calc(((100% - var(--header-height)) * 0.3));
+    padding-left: 5%;
 
     justify-content: center;
     background-color: var(--color-primary);
     color: var(--color-white);
+
+    z-index: 98;
+
+    & .full-menu__list-item:nth-child(4) {
+      margin: 1rem 0 10vh;
+    }
+
+    & .full-menu__list-item:nth-child(5) {
+      margin: 1rem 0 3rem;
+    }
 
     & .full-menu__link {
       color: var(--color-white);
@@ -232,6 +266,17 @@
 
     &.full-menu--right {
       transform: translateX((calc(100% + var(--header-height))));
+    }
+  }
+
+  &__contact {
+    & ul {
+      gap: 1.5rem;
+    }
+
+    & li svg {
+      display: block;
+      margin-bottom: 1rem;
     }
   }
 
@@ -304,17 +349,28 @@
   &__list-item {
     width: fit-content;
     cursor: pointer;
-  }
 
-  & svg {
-  }
+    & path {
+      fill: var(--color-primary);
+    }
 
-  & path {
-    fill: var(--color-primary);
-  }
+    & circle {
+      stroke: var(--color-primary);
+    }
 
-  & circle {
-    stroke: var(--color-primary);
+    // &:hover svg {
+    //   fill: var(--color-secondary);
+    //   stroke: var(--color-secondary);
+    // }
+
+    &:hover path {
+      fill: var(--color-secondary);
+      stroke: var(--color-secondary);
+    }
+
+    &:hover circle {
+      stroke: var(--color-secondary);
+    }
   }
 
   &__language {
@@ -371,6 +427,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: flex-end;
+    gap: 1.5rem;
 
     z-index: 5;
   }
@@ -417,6 +474,10 @@
   &__slider {
     position: relative;
     overflow: hidden;
+  }
+
+  & iframe {
+    aspect-ratio: 4 / 2;
   }
 
   &__swiper-button-prev,
@@ -512,8 +573,64 @@
 }
 /* Quick-access section end */
 
-/* Footer start */
+/* Civil-protection section start */
+.civil-protection {
+  &__intro-wrapper {
+    padding-bottom: 0;
+  }
 
+  &__content {
+    margin-bottom: 4rem;
+  }
+
+  &__text {
+    max-width: 75ch;
+  }
+
+  &__slider {
+    position: relative;
+    overflow: hidden;
+  }
+
+  & iframe {
+    aspect-ratio: 4 / 3;
+  }
+
+  &__swiper-button-prev,
+  &__swiper-button-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    z-index: 10;
+  }
+
+  &__swiper-button-prev {
+    left: 3rem;
+  }
+
+  &__swiper-button-next {
+    right: 3rem;
+  }
+
+  &__useful {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5rem;
+  }
+}
+/* Civil-protection section end */
+
+/* parallax-footer */
+.parallax-footer {
+  width: 100%;
+  min-height: 40vh;
+  z-index: -2;
+}
+
+/* Footer start */
 .footer {
   display: flex;
   flex-direction: row;
@@ -521,9 +638,14 @@
   align-items: flex-start;
   gap: 1rem;
 
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   min-height: 40vh;
   padding: 3rem 3rem 1rem;
   background-color: var(--color-primary);
+
+  z-index: -1;
 
   &__logo-container {
     display: flex;

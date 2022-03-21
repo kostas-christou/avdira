@@ -1,52 +1,97 @@
-// Hamburger menu listener
+const expandLinks = document.querySelectorAll('.expand-link');
 const hamMenu = document.querySelector('.header__ham-menu');
-const fullMenuLeft = document.querySelector('.full-menu--left');
+const fullMenusLeft = document.querySelectorAll('.full-menu--left');
 const fullMenuRight = document.querySelector('.full-menu--right');
+const parallaxWrapper = document.querySelector('.parallax-wrapper');
 
+// Defining functions to open and close the mega-menu
+function openFullMenu(menuIndex = 0) {
+  // Change the hamburger menu icon
+  hamMenu.classList.remove('header__ham-menu--open');
+  hamMenu.classList.add('header__ham-menu--close');
+  // Hide the current open left part of the full menu (if any)
+  const openLeftMenu = document.querySelector(
+    '.full-menu--left.full-menu--expand'
+  );
+  if (openLeftMenu) {
+    openLeftMenu.classList.remove('full-menu--expand');
+    openLeftMenu.classList.add('full-menu--collapse');
+  }
+  // Show the new left part of the full menu
+  fullMenusLeft[menuIndex].classList.remove('full-menu--collapse');
+  fullMenusLeft[menuIndex].classList.add('full-menu--expand');
+  // Show the right part of the full menu
+  fullMenuRight.classList.remove('full-menu--collapse');
+  fullMenuRight.classList.add('full-menu--expand');
+  // Add an underline on the current active link, after removing the previous one (if any)
+  const previousActiveLink = document.querySelector('.current');
+  if (previousActiveLink) {
+    previousActiveLink.classList.remove('current');
+  }
+  expandLinks[menuIndex].classList.add('current');
+  // Remove pointer events for the rest of the document
+  parallaxWrapper.style.pointerEvents = 'none';
+}
+
+function closeFullMenu(menuIndex = 0) {
+  // Change the hamburger menu icon
+  hamMenu.classList.remove('header__ham-menu--close');
+  hamMenu.classList.add('header__ham-menu--open');
+  // Hide the left part of the full menu
+  const openLeftMenu = document.querySelector(
+    '.full-menu--left.full-menu--expand'
+  );
+  if (openLeftMenu) {
+    openLeftMenu.classList.remove('full-menu--expand');
+    openLeftMenu.classList.add('full-menu--collapse');
+  }
+  // Hide the right part of the full menu
+  fullMenuRight.classList.remove('full-menu--expand');
+  fullMenuRight.classList.add('full-menu--collapse');
+  // Remove the underline on the previous active link (if any)
+  const previousActiveLink = document.querySelector('.current');
+  if (previousActiveLink) {
+    previousActiveLink.classList.remove('current');
+  }
+  // Add pointer events for the rest of the document
+  parallaxWrapper.style.pointerEvents = 'auto';
+}
+
+// Hamburger menu event-listener
 hamMenu.addEventListener('click', (e) => {
   e.stopPropagation();
 
   if (hamMenu.classList.contains('header__ham-menu--open')) {
-    hamMenu.classList.remove('header__ham-menu--open');
-    hamMenu.classList.add('header__ham-menu--close');
-    fullMenuLeft.classList.remove('full-menu--collapse');
-    fullMenuLeft.classList.add('full-menu--expand');
-    fullMenuRight.classList.remove('full-menu--collapse');
-    fullMenuRight.classList.add('full-menu--expand');
+    openFullMenu();
   } else {
-    hamMenu.classList.remove('header__ham-menu--close');
-    hamMenu.classList.add('header__ham-menu--open');
-    fullMenuLeft.classList.add('full-menu--collapse');
-    fullMenuLeft.classList.remove('full-menu--expand');
-    fullMenuRight.classList.add('full-menu--collapse');
-    fullMenuRight.classList.remove('full-menu--expand');
+    closeFullMenu();
   }
+});
+
+// Open menus on nav-link click
+expandLinks.forEach((expandLink, index) => {
+  expandLink.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openFullMenu(index);
+  });
 });
 
 // Close all open menus when clicking outside
 document.addEventListener('click', (e) => {
-  const menusOpen = document.querySelectorAll('.full-menu--expand');
+  const openMenuLeft = document.querySelector(
+    '.full-menu--left.full-menu--expand'
+  );
+  const openMenuRight = document.querySelector(
+    '.full-menu--right.full-menu--expand'
+  );
 
-  if (menusOpen.length > 0) {
-    console.log('Menus open!');
-    let menuRemainOpen = [];
-
-    menusOpen.forEach((menu) => {
-      if (menu.contains(e.target)) {
-        menuRemainOpen.push('true');
-      } else {
-        menuRemainOpen.push('false');
-      }
-    });
-
-    if (menuRemainOpen.indexOf('true') === -1) {
-      hamMenu.classList.remove('header__ham-menu--close');
-      hamMenu.classList.add('header__ham-menu--open');
-      fullMenuLeft.classList.remove('full-menu--expand');
-      fullMenuLeft.classList.add('full-menu--collapse');
-      fullMenuRight.classList.remove('full-menu--expand');
-      fullMenuRight.classList.add('full-menu--collapse');
-    }
+  if (
+    openMenuLeft &&
+    openMenuRight &&
+    !openMenuLeft.contains(e.target) &&
+    !openMenuRight.contains(e.target)
+  ) {
+    closeFullMenu();
   }
 });
 

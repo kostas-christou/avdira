@@ -43,17 +43,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1.5rem;
   }
 
   &__nav-link {
-    padding: 0.5em;
+    padding: 0.5em 0;
     font-family: var(--ff-roboto-slab);
     font-weight: 600;
 
     position: relative;
 
-    &::before {
+    &::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -71,9 +71,23 @@
     }
 
     &:hover {
-      &::before {
+      &::after {
         transform: translateX(-50%) scaleX(1);
       }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background-color: currentColor;
+
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease-in-out;
     }
   }
 
@@ -206,6 +220,7 @@
 .full-menu {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
 
   position: fixed;
   top: var(--header-height);
@@ -269,6 +284,44 @@
     }
   }
 
+  &--1 {
+    display: block;
+    padding-inline: 10%;
+  }
+
+  &__img-wrapper {
+    max-height: 80%;
+    overflow: hidden;
+  }
+
+  &__services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  &__service-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 8rem;
+    border: 2px solid var(--color-primary);
+    cursor: pointer;
+
+    transition: background-color 0.25s ease-in-out;
+
+    &:hover {
+      background-color: var(--color-primary-extra-light);
+    }
+
+    & p {
+      font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
+      font-weight: 700;
+    }
+  }
+
   &__contact {
     & ul {
       gap: 1.5rem;
@@ -280,20 +333,13 @@
     }
   }
 
-  &__services {
-  }
-
-  &__administration {
-  }
-
-  &__tourism {
-  }
-
-  &__participate {
+  &--0 {
+    gap: 3rem;
   }
 
   &__list-title {
-    margin-bottom: 1.5rem;
+    font-size: clamp(2.1rem, 1.56rem + 1.44vw, 3rem);
+    margin-bottom: 3rem;
     font-weight: 700;
   }
 
@@ -327,6 +373,29 @@
     &:hover::before {
       transform: scaleY(1);
     }
+  }
+
+  &__search-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 6rem;
+  }
+
+  &__search-input {
+    width: 40vw;
+    border: none;
+    border-bottom: 1px solid var(--color-primary);
+    background-color: var(--color-secondary);
+
+    :placeholder-shown {
+      color: var(--color-primary);
+    }
+  }
+
+  &__search-btn {
+    order: -1;
   }
 }
 /* Expandable menu end */

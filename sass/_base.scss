@@ -1,6 +1,7 @@
 :root {
   /* Color CSS variables */
-  --color-secondary: #b2f0e5;
+  --color-secondary-dark: #f36e23;
+  --color-secondary: #ffb794;
   --color-primary: #07116b;
   --color-primary-extra-light: #5960a748;
   --color-bg: #e5e5e5;
@@ -26,11 +27,33 @@
   --pad-block-large: 9rem;
   --pad-block-xl: 15rem;
 
-  /* Elements height */
-  --header-height: 5rem;
+  /* Elements height variables */
+  --header-height: 3.5rem;
+  --footer-height: 50vh;
+
+  /* Breakpoints for media queries */
+  /*
+  bp-600px: 37.5em 
+  bp-800px: 55em 
+  bp-1380px: 86.25em 
+  bp-1040px: 65em 
+  bp-1040px: 65em 
+  */
 }
 
-/* global reset */
+@media screen and (min-width: 37.5em) {
+  :root {
+    --header-height: 4rem;
+  }
+}
+
+@media screen and (min-width: 86.25em) {
+  :root {
+    --header-height: 5rem;
+  }
+}
+
+/* Global reset */
 *,
 *::before,
 *::after {
@@ -45,9 +68,9 @@
 }
 
 *::placeholder {
-  font-size: 0.875rem;
+  font-size: 2rem;
   opacity: 0.7;
-  color: var(--color-primary);
+  color: var(--color-secondary-dark);
 }
 
 html {
@@ -55,7 +78,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* general styling properties and typography start */
+/* General styling properties and typography start */
 body {
   min-height: 100vh;
 
@@ -108,7 +131,7 @@ p {
   letter-spacing: 0.5px;
 }
 
-// link styles in the right order
+// Link styles in the right order
 a {
   font-family: inherit;
   font-size: clamp(1rem, 0.925rem + 0.2vw, 1.125rem);
@@ -142,6 +165,10 @@ img {
   max-width: 100%;
 }
 
+iframe {
+  border: 0;
+}
+
 button,
 label,
 input {
@@ -153,25 +180,34 @@ input {
   color: var(--color-primary);
 }
 
-/* general styling properties and typography end */
+/* General styling properties and typography end */
 
-/* utility classes start */
-.home-container-center {
-  width: 75%;
-  margin: 0 auto;
-  padding-block: var(--pad-block-medium);
-}
-
-.home-container-right {
-  width: 87.5%;
-  margin-left: auto;
-  margin-bottom: var(--pad-block-medium);
-}
-
+/* Utility classes start */
+.home-container-center,
+.home-container-right,
 .home-container-left {
-  width: 87.5%;
-  margin-left: auto;
-  // padding-block: var(--pad-block-medium);
+  width: 95%;
+  margin: 0 auto;
+  padding-block: var(--pad-block-tiny);
+}
+
+@media screen and (min-width: 65em) {
+  .home-container-center {
+    width: 75%;
+    margin: 0 auto;
+    padding-block: var(--pad-block-medium);
+  }
+
+  .home-container-right {
+    width: 87.5%;
+    margin-left: auto;
+    margin-bottom: var(--pad-block-medium);
+  }
+
+  .home-container-left {
+    width: 87.5%;
+    margin-left: auto;
+  }
 }
 
 .hide {
@@ -184,4 +220,4 @@ input {
     transform: scaleY(1);
   }
 }
-/* utility classes end */
+/* Utility classes end */

@@ -1,7 +1,7 @@
-/* components start */
+/* Components start */
 
-/* buttons start */
-/* sliding-button start */
+/* Buttons start */
+/* Sliding-button start */
 .btn-sliding {
   display: flex;
   justify-content: center;
@@ -48,7 +48,7 @@
 
     & .btn-sliding__overlay {
       border-radius: 100vh;
-      inset: -1px -1px -1px 68%;
+      inset: -1px -1px -1px 64%;
     }
   }
 
@@ -90,9 +90,9 @@
     }
   }
 }
-/* sliding-button end */
+/* Sliding-button end */
 
-/* arrow-button start */
+/* Arrow-button start */
 .arrow-btn {
   padding-block: 0.5em;
   position: relative;
@@ -109,20 +109,20 @@
     transform: translateX(1em);
   }
 }
-/* arrow-button end */
+/* Arrow-button end */
 
-/* buttons end */
+/* Buttons end */
 
-/* section-title container start */
+/* Section-title container start */
 
 .intro {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: baseline;
-  gap: 2rem;
+  gap: 1.5rem;
 
-  width: 90%;
-  margin: 0 auto 4rem;
+  width: 95%;
+  margin: 4rem auto 1rem;
 
   position: relative;
 
@@ -202,9 +202,21 @@
     }
   }
 }
-/* section-title container end */
 
-/* hero-card start */
+/* Media queries for section intro */
+@media screen and (min-width: 37.5em) {
+  .intro {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 2rem;
+
+    width: 90%;
+    margin: 4rem auto 4rem;
+  }
+}
+/* Section-title container end */
+
+/* Hero-card start */
 .hero-card {
   padding: 2rem;
 
@@ -280,9 +292,9 @@
     }
   }
 }
-/* hero-card end */
+/* Hero-card end */
 
-/* welcome-card start */
+/* Welcome-card start */
 .welcome-card {
   display: flex;
   flex-direction: column;
@@ -363,9 +375,9 @@
     }
   }
 }
-/* welcome-card end */
+/* Welcome-card end */
 
-/* news-card start */
+/* News-card start */
 .news-card {
   position: relative;
 
@@ -433,7 +445,15 @@
     }
   }
 }
-/* news-card end */
+
+/* Media queries for news-card */
+.news-card {
+  &__link {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+/* News-card end */
 
 /* Civil-protection card start */
 .cp-card {
@@ -489,9 +509,9 @@
   }
 }
 /* Civil-protection card end */
-/* cards end */
+/* Cards end */
 
-/* video start */
+/* Video start */
 .video {
   position: relative;
 
@@ -520,7 +540,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    // width: 7rem;
     width: clamp(6rem, 15%, 8rem);
     aspect-ratio: 1;
 
@@ -550,14 +569,13 @@
     display: block;
 
     width: 100%;
-    // aspect-ratio: 4 / 2;
 
     position: relative;
   }
 }
-/* video end */
+/* Video end */
 
-/* calendar start */
+/* Calendar start */
 .calendar {
   max-width: fit-content;
 
@@ -586,7 +604,7 @@
   &__weekday {
     font-family: var(--ff-roboto) !important;
     font-weight: 400 !important;
-    color: var(--color-white) !important;
+    color: var(--color-secondary) !important;
     opacity: 0.9 !important;
   }
 
@@ -621,7 +639,7 @@
     font-weight: 500;
   }
 }
-/* calendar end */
+/* Calendar end */
 
 /* Swiper slider buttons start */
 .slider-btn-next,
@@ -630,7 +648,6 @@
   justify-content: center;
   align-items: center;
 
-  // width: 4rem;
   width: clamp(3rem, 4.5%, 4rem);
   aspect-ratio: 1;
   border-radius: 50%;
@@ -655,6 +672,7 @@
 
   padding-block: 0 3rem;
 }
+
 /* Footer separator end */
 
 /* Back-to-top button start */
@@ -674,7 +692,6 @@
   cursor: pointer;
   z-index: 100;
 }
-
 /* Back-to-top button end */
 
-/* components end */
+/* Components end */

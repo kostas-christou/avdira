@@ -10,20 +10,23 @@
 .aside {
   position: fixed;
   top: var(--header-height);
+  bottom: 0;
 
-  height: calc(100vh - var(--header-height));
   width: var(--header-height);
   background-color: var(--color-white);
 
-  &--left {
-    left: 0;
+  transition: transform 0.5s ease-in-out;
 
-    z-index: 80;
+  &--left {
+    @extend .aside;
+    display: none;
   }
 
   &--right {
+    @extend .aside;
     right: 0;
     z-index: 100;
+    transform: translateX(100%);
   }
 }
 
@@ -36,15 +39,41 @@
 
 .parallax-wrapper {
   height: 100%;
-  width: calc(100% - (var(--header-height) * 2));
+  width: 100%;
 
   overflow-x: hidden;
   overflow-y: auto;
-  // perspective: 100px;
-
-  margin: 0 auto;
 
   position: relative;
+}
+
+/* Media queries for layouts */
+
+@media screen and (min-width: 55em) {
+  .parallax-wrapper {
+    height: 100%;
+    width: calc(100% - (var(--header-height) * 2));
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    // perspective: 100px;
+
+    margin: 0 auto;
+
+    position: relative;
+  }
+
+  .aside {
+    &--left {
+      display: block;
+      left: 0;
+      z-index: 80;
+    }
+
+    &--right {
+      transform: translateX(0);
+    }
+  }
 }
 
 /* Home page general layout end */

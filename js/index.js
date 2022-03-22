@@ -3,9 +3,16 @@ const hamMenu = document.querySelector('.header__ham-menu');
 const fullMenusLeft = document.querySelectorAll('.full-menu--left');
 const fullMenuRight = document.querySelector('.full-menu--right');
 const parallaxWrapper = document.querySelector('.parallax-wrapper');
+const backToTop = document.querySelector('.back-to-top');
+const mediaQuery800 = window.matchMedia('(max-width: 55em)');
+const asideRight = document.querySelector('.aside--right');
 
 // Defining functions to open and close the mega-menu
 function openFullMenu(menuIndex = 0) {
+  // For small screens show the right aside
+  if (mediaQuery800.matches) {
+    asideRight.style.transform = 'translateX(0)';
+  }
   // Change the hamburger menu icon
   hamMenu.classList.remove('header__ham-menu--open');
   hamMenu.classList.add('header__ham-menu--close');
@@ -34,6 +41,10 @@ function openFullMenu(menuIndex = 0) {
 }
 
 function closeFullMenu(menuIndex = 0) {
+  // For small screens hide the right aside
+  if (mediaQuery800.matches) {
+    asideRight.style.transform = 'translateX(100%)';
+  }
   // Change the hamburger menu icon
   hamMenu.classList.remove('header__ham-menu--close');
   hamMenu.classList.add('header__ham-menu--open');
@@ -58,23 +69,27 @@ function closeFullMenu(menuIndex = 0) {
 }
 
 // Hamburger menu event-listener
-hamMenu.addEventListener('click', (e) => {
-  e.stopPropagation();
+if (hamMenu) {
+  hamMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
 
-  if (hamMenu.classList.contains('header__ham-menu--open')) {
-    openFullMenu();
-  } else {
-    closeFullMenu();
-  }
-});
+    if (hamMenu.classList.contains('header__ham-menu--open')) {
+      openFullMenu();
+    } else {
+      closeFullMenu();
+    }
+  });
+}
 
 // Open menus on nav-link click
-expandLinks.forEach((expandLink, index) => {
-  expandLink.addEventListener('click', (e) => {
-    e.stopPropagation();
-    openFullMenu(index);
+if (expandLinks.length > 0) {
+  expandLinks.forEach((expandLink, index) => {
+    expandLink.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openFullMenu(index);
+    });
   });
-});
+}
 
 // Close all open menus when clicking outside
 document.addEventListener('click', (e) => {
@@ -95,8 +110,15 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Back-to-top button functionallity
-const backToTop = document.querySelector('.back-to-top');
+// Back-to-top button functionality
+if (backToTop) {
+  window.addEventListener('scroll', checkPosition);
+
+  backToTop.addEventListener('click', () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  });
+}
 
 function checkPosition() {
   let windowY = window.scrollY;
@@ -107,15 +129,6 @@ function checkPosition() {
   } else {
     backToTop.classList.remove('hide');
   }
-}
-
-if (backToTop) {
-  window.addEventListener('scroll', checkPosition);
-
-  backToTop.addEventListener('click', () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  });
 }
 
 // Hide video overlay on click and show youtube video
@@ -136,7 +149,7 @@ function showVideo(e) {
   videoOverlay.style.display = 'none';
 }
 
-// Calendar functionallity
+// Calendar functionality
 if (document.getElementById('color-calendar')) {
   new Calendar({
     id: '#color-calendar',
@@ -164,16 +177,16 @@ const meetingsSwiper = new Swiper('.meetings__swiper', {
   spaceBetween: 20,
   grabCursor: true,
   breakpoints: {
-    1000: {
+    1050: {
       slidesPerView: 1.4,
-      spaceBetween: 60,
+      spaceBetween: 30,
     },
     1350: {
       slidesPerView: 1.4,
-      spaceBetween: 60,
+      spaceBetween: 40,
     },
-    1850: {
-      slidesPerView: 1.4,
+    2200: {
+      slidesPerView: 2.4,
       spaceBetween: 60,
     },
   },
@@ -184,9 +197,23 @@ const meetingsSwiper = new Swiper('.meetings__swiper', {
 });
 
 const quickAccessSwiper = new Swiper('.quick-access__swiper', {
-  slidesPerView: 2.4,
-  spaceBetween: 40,
+  slidesPerView: 1,
+  spaceBetween: 20,
   grabCursor: true,
+  breakpoints: {
+    850: {
+      slidesPerView: 1.5,
+      spaceBetween: 20,
+    },
+    1350: {
+      slidesPerView: 2.5,
+      spaceBetween: 30,
+    },
+    1850: {
+      slidesPerView: 3.5,
+      spaceBetween: 50,
+    },
+  },
   navigation: {
     nextEl: '.quick-access__swiper-button-next',
     prevEl: '.quick-access__swiper-button-prev',
@@ -204,7 +231,7 @@ const civilProtectionSwiper = new Swiper('.civil-protection__swiper', {
     },
     1350: {
       slidesPerView: 2.5,
-      spaceBetween: 40,
+      spaceBetween: 30,
     },
     1850: {
       slidesPerView: 3.5,

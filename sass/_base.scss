@@ -3,6 +3,7 @@
   --color-secondary-dark: #f36e23;
   --color-secondary: #ffb794;
   --color-primary: #07116b;
+  --color-primary-light: hsl(234, 88%, 40%);
   --color-primary-extra-light: #5960a748;
   --color-bg: #e5e5e5;
   --color-bg-dark: #f8f8f8;
@@ -35,8 +36,8 @@
   /*
   bp-600px: 37.5em 
   bp-800px: 55em 
+   bp-1040px: 65em 
   bp-1380px: 86.25em 
-  bp-1040px: 65em 
   bp-1040px: 65em 
   */
 }
@@ -213,6 +214,14 @@ input {
 .hide {
   opacity: 0;
   visibility: hidden;
+}
+
+.appear {
+  display: block;
+}
+
+.disappear {
+  display: none;
 }
 
 .current.header__nav-link {

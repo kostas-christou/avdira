@@ -25,7 +25,7 @@
   &--right {
     @extend .aside;
     right: 0;
-    z-index: 100;
+    z-index: 101;
     transform: translateX(100%);
   }
 }

@@ -1,18 +1,17 @@
 const expandLinks = document.querySelectorAll('.expand-link');
 const hamMenu = document.querySelector('.header__ham-menu');
+const headerNav = document.querySelector('.header__nav');
+const asideRight = document.querySelector('.aside--right');
 const fullMenusLeft = document.querySelectorAll('.full-menu--left');
 const fullMenuRight = document.querySelector('.full-menu--right');
+const fullMenuOverlay = document.querySelector('.full-menu__overlay');
 const parallaxWrapper = document.querySelector('.parallax-wrapper');
 const backToTop = document.querySelector('.back-to-top');
-const mediaQuery800 = window.matchMedia('(max-width: 55em)');
-const asideRight = document.querySelector('.aside--right');
+const mediaQueryMax800 = window.matchMedia('(max-width: 54.99em)');
+const mediaQueryMax1380 = window.matchMedia('(max-width: 86.24em)');
+const mediaQueryMin1380 = window.matchMedia('(min-width: 86.25em)');
 
-// Defining functions to open and close the mega-menu
-function openFullMenu(menuIndex = 0) {
-  // For small screens show the right aside
-  if (mediaQuery800.matches) {
-    asideRight.style.transform = 'translateX(0)';
-  }
+function openDesktopMenu(menuIndex = 0) {
   // Change the hamburger menu icon
   hamMenu.classList.remove('header__ham-menu--open');
   hamMenu.classList.add('header__ham-menu--close');
@@ -30,21 +29,18 @@ function openFullMenu(menuIndex = 0) {
   // Show the right part of the full menu
   fullMenuRight.classList.remove('full-menu--collapse');
   fullMenuRight.classList.add('full-menu--expand');
+  // Show the overlay
+  fullMenuOverlay.classList.remove('disappear');
+  fullMenuOverlay.classList.add('appear');
   // Add an underline on the current active link, after removing the previous one (if any)
   const previousActiveLink = document.querySelector('.current');
   if (previousActiveLink) {
     previousActiveLink.classList.remove('current');
   }
   expandLinks[menuIndex].classList.add('current');
-  // Remove pointer events for the rest of the document
-  parallaxWrapper.style.pointerEvents = 'none';
 }
 
-function closeFullMenu(menuIndex = 0) {
-  // For small screens hide the right aside
-  if (mediaQuery800.matches) {
-    asideRight.style.transform = 'translateX(100%)';
-  }
+function closeDesktopMenu(menuIndex = 0) {
   // Change the hamburger menu icon
   hamMenu.classList.remove('header__ham-menu--close');
   hamMenu.classList.add('header__ham-menu--open');
@@ -59,6 +55,9 @@ function closeFullMenu(menuIndex = 0) {
   // Hide the right part of the full menu
   fullMenuRight.classList.remove('full-menu--expand');
   fullMenuRight.classList.add('full-menu--collapse');
+  // Hide the overlay
+  fullMenuOverlay.classList.remove('appear');
+  fullMenuOverlay.classList.add('disappear');
   // Remove the underline on the previous active link (if any)
   const previousActiveLink = document.querySelector('.current');
   if (previousActiveLink) {
@@ -68,47 +67,171 @@ function closeFullMenu(menuIndex = 0) {
   parallaxWrapper.style.pointerEvents = 'auto';
 }
 
+function openMobileMenu(menuIndex = 0) {
+  // Change the hamburger menu icon
+  hamMenu.classList.remove('header__ham-menu--open');
+  hamMenu.classList.add('header__ham-menu--close');
+  // For small screens show the right aside
+  if (mediaQueryMax800.matches) {
+    asideRight.style.transform = 'translateX(0)';
+  }
+  // For small screens show the header navbar as expandable
+  headerNav.style.transform = 'translateX(0)';
+  // Show the right part of the full menu
+  fullMenuRight.classList.remove('full-menu--collapse');
+  fullMenuRight.classList.add('full-menu--expand');
+  // Remove pointer events for the rest of the document
+  parallaxWrapper.style.pointerEvents = 'none';
+}
+
+function closeMobileMenu(menuIndex = 0) {
+  // Change the hamburger menu icon
+  hamMenu.classList.remove('header__ham-menu--close');
+  hamMenu.classList.add('header__ham-menu--open');
+  // For small screens hide the right aside
+  if (mediaQueryMax800.matches) {
+    asideRight.style.transform = 'translateX(100%)';
+  }
+  // Hhide the header navbar
+  headerNav.style.transform = 'translateX(calc(100% + var(--header-height)))';
+  // Hide the left part of the full menu
+  const openLeftMenu = document.querySelector(
+    '.full-menu--left.full-menu--expand'
+  );
+  if (openLeftMenu) {
+    openLeftMenu.classList.remove('full-menu--expand');
+    openLeftMenu.classList.add('full-menu--collapse');
+  }
+  // Hide the right part of the full menu
+  fullMenuRight.classList.remove('full-menu--expand');
+  fullMenuRight.classList.add('full-menu--collapse');
+
+  // Add pointer events for the rest of the document
+  parallaxWrapper.style.pointerEvents = 'auto';
+}
+
+function openInternalMobileMenu(menuIndex = 0) {
+  // Hide the main nav menu on small screens
+  headerNav.style.transform = 'translateX(calc(100% + var(--header-height)))';
+  // Hide the current open left part of the full menu (if any)
+  const openLeftMenu = document.querySelector(
+    '.full-menu--left.full-menu--expand'
+  );
+  if (openLeftMenu) {
+    openLeftMenu.classList.remove('full-menu--expand');
+    openLeftMenu.classList.add('full-menu--collapse');
+  }
+  // Show the new left part of the full menu
+  fullMenusLeft[menuIndex].classList.remove('full-menu--collapse');
+  fullMenusLeft[menuIndex].classList.add('full-menu--expand');
+
+  // Show the right part of the full menu
+  fullMenuRight.classList.remove('full-menu--collapse');
+  fullMenuRight.classList.add('full-menu--expand');
+
+  // Add an underline on the current active link, after removing the previous one (if any)
+  const previousActiveLink = document.querySelector('.current');
+  if (previousActiveLink) {
+    previousActiveLink.classList.remove('current');
+  }
+  expandLinks[menuIndex].classList.add('current');
+  parallaxWrapper.style.pointerEvents = 'none';
+}
+
 // Hamburger menu event-listener
-if (hamMenu) {
+if (hamMenu && mediaQueryMin1380.matches) {
   hamMenu.addEventListener('click', (e) => {
     e.stopPropagation();
 
     if (hamMenu.classList.contains('header__ham-menu--open')) {
-      openFullMenu();
+      openDesktopMenu();
     } else {
-      closeFullMenu();
+      closeDesktopMenu();
     }
   });
 }
 
-// Open menus on nav-link click
-if (expandLinks.length > 0) {
+if (hamMenu && mediaQueryMax1380.matches) {
+  hamMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    if (hamMenu.classList.contains('header__ham-menu--open')) {
+      openMobileMenu();
+    } else {
+      closeMobileMenu();
+    }
+  });
+}
+
+// Open internal menus on nav-link click
+// Large screens
+if (expandLinks.length > 0 && mediaQueryMin1380.matches) {
   expandLinks.forEach((expandLink, index) => {
     expandLink.addEventListener('click', (e) => {
       e.stopPropagation();
-      openFullMenu(index);
+      openDesktopMenu(index);
+    });
+  });
+}
+// Small screens
+if (expandLinks.length > 0 && mediaQueryMax1380.matches) {
+  expandLinks.forEach((expandLink, index) => {
+    expandLink.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openInternalMobileMenu(index);
     });
   });
 }
 
 // Close all open menus when clicking outside
-document.addEventListener('click', (e) => {
-  const openMenuLeft = document.querySelector(
-    '.full-menu--left.full-menu--expand'
-  );
-  const openMenuRight = document.querySelector(
-    '.full-menu--right.full-menu--expand'
-  );
+// Large screens
+if (mediaQueryMin1380.matches) {
+  document.addEventListener('click', (e) => {
+    const openMenuLeft = document.querySelector(
+      '.full-menu--left.full-menu--expand'
+    );
+    const openMenuRight = document.querySelector(
+      '.full-menu--right.full-menu--expand'
+    );
 
-  if (
-    openMenuLeft &&
-    openMenuRight &&
-    !openMenuLeft.contains(e.target) &&
-    !openMenuRight.contains(e.target)
-  ) {
-    closeFullMenu();
-  }
-});
+    if (
+      openMenuLeft &&
+      openMenuRight &&
+      !openMenuLeft.contains(e.target) &&
+      !openMenuRight.contains(e.target)
+    ) {
+      closeDesktopMenu();
+    }
+  });
+}
+
+if (mediaQueryMax1380.matches) {
+  document.addEventListener('click', (e) => {
+    const openMenuLeft = document.querySelector(
+      '.full-menu--left.full-menu--expand'
+    );
+    const openMenuRight = document.querySelector(
+      '.full-menu--right.full-menu--expand'
+    );
+
+    if (
+      openMenuLeft &&
+      openMenuRight &&
+      !openMenuLeft.contains(e.target) &&
+      !openMenuRight.contains(e.target)
+    ) {
+      closeMobileMenu();
+    } else if (
+      !openMenuLeft &&
+      openMenuRight &&
+      headerNav &&
+      !openMenuRight.contains(e.target) &&
+      !headerNav.contains(e.target)
+    ) {
+      closeMobileMenu();
+    }
+  });
+}
 
 // Back-to-top button functionality
 if (backToTop) {

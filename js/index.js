@@ -8,9 +8,10 @@ const fullMenuOverlay = document.querySelector('.full-menu__overlay');
 const parallaxWrapper = document.querySelector('.parallax-wrapper');
 const backToTop = document.querySelector('.back-to-top');
 const mediaQueryMax800 = window.matchMedia('(max-width: 54.99em)');
-const mediaQueryMax1380 = window.matchMedia('(max-width: 86.24em)');
-const mediaQueryMin1380 = window.matchMedia('(min-width: 86.25em)');
+const mediaQueryMax1300 = window.matchMedia('(max-width: 81.24em)');
+const mediaQueryMin1300 = window.matchMedia('(min-width: 81.25em)');
 
+// Functionality for mega menu both for mobile and desktop
 function openDesktopMenu(menuIndex = 0) {
   // Change the hamburger menu icon
   hamMenu.classList.remove('header__ham-menu--open');
@@ -75,6 +76,9 @@ function openMobileMenu(menuIndex = 0) {
   if (mediaQueryMax800.matches) {
     asideRight.style.transform = 'translateX(0)';
   }
+  // Show the overlay
+  // fullMenuOverlay.classList.remove('disappear');
+  // fullMenuOverlay.classList.add('appear');
   // For small screens show the header navbar as expandable
   headerNav.style.transform = 'translateX(0)';
   // Show the right part of the full menu
@@ -105,12 +109,21 @@ function closeMobileMenu(menuIndex = 0) {
   // Hide the right part of the full menu
   fullMenuRight.classList.remove('full-menu--expand');
   fullMenuRight.classList.add('full-menu--collapse');
-
+  // Hide the overlay
+  // fullMenuOverlay.classList.remove('appear');
+  // fullMenuOverlay.classList.add('disappear');
   // Add pointer events for the rest of the document
   parallaxWrapper.style.pointerEvents = 'auto';
 }
 
 function openInternalMobileMenu(menuIndex = 0) {
+  // Change the hamburger menu icon
+  hamMenu.classList.remove('header__ham-menu--open');
+  hamMenu.classList.add('header__ham-menu--close');
+  // For small screens show the right aside
+  if (mediaQueryMax800.matches) {
+    asideRight.style.transform = 'translateX(0)';
+  }
   // Hide the main nav menu on small screens
   headerNav.style.transform = 'translateX(calc(100% + var(--header-height)))';
   // Hide the current open left part of the full menu (if any)
@@ -121,6 +134,9 @@ function openInternalMobileMenu(menuIndex = 0) {
     openLeftMenu.classList.remove('full-menu--expand');
     openLeftMenu.classList.add('full-menu--collapse');
   }
+  // Show the overlay
+  // fullMenuOverlay.classList.remove('disappear');
+  // fullMenuOverlay.classList.add('appear');
   // Show the new left part of the full menu
   fullMenusLeft[menuIndex].classList.remove('full-menu--collapse');
   fullMenusLeft[menuIndex].classList.add('full-menu--expand');
@@ -139,7 +155,8 @@ function openInternalMobileMenu(menuIndex = 0) {
 }
 
 // Hamburger menu event-listener
-if (hamMenu && mediaQueryMin1380.matches) {
+// Large screens
+if (hamMenu && mediaQueryMin1300.matches) {
   hamMenu.addEventListener('click', (e) => {
     e.stopPropagation();
 
@@ -151,7 +168,8 @@ if (hamMenu && mediaQueryMin1380.matches) {
   });
 }
 
-if (hamMenu && mediaQueryMax1380.matches) {
+// Small screens
+if (hamMenu && mediaQueryMax1300.matches) {
   hamMenu.addEventListener('click', (e) => {
     e.stopPropagation();
 
@@ -165,7 +183,7 @@ if (hamMenu && mediaQueryMax1380.matches) {
 
 // Open internal menus on nav-link click
 // Large screens
-if (expandLinks.length > 0 && mediaQueryMin1380.matches) {
+if (expandLinks.length > 0 && mediaQueryMin1300.matches) {
   expandLinks.forEach((expandLink, index) => {
     expandLink.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -173,8 +191,9 @@ if (expandLinks.length > 0 && mediaQueryMin1380.matches) {
     });
   });
 }
+
 // Small screens
-if (expandLinks.length > 0 && mediaQueryMax1380.matches) {
+if (expandLinks.length > 0 && mediaQueryMax1300.matches) {
   expandLinks.forEach((expandLink, index) => {
     expandLink.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -185,7 +204,7 @@ if (expandLinks.length > 0 && mediaQueryMax1380.matches) {
 
 // Close all open menus when clicking outside
 // Large screens
-if (mediaQueryMin1380.matches) {
+if (mediaQueryMin1300.matches) {
   document.addEventListener('click', (e) => {
     const openMenuLeft = document.querySelector(
       '.full-menu--left.full-menu--expand'
@@ -205,7 +224,8 @@ if (mediaQueryMin1380.matches) {
   });
 }
 
-if (mediaQueryMax1380.matches) {
+// Small screens
+if (mediaQueryMax1300.matches) {
   document.addEventListener('click', (e) => {
     const openMenuLeft = document.querySelector(
       '.full-menu--left.full-menu--expand'

@@ -34,7 +34,7 @@
 
   /* Breakpoints for media queries */
   /*
-  bp-600px: 37.5em 
+  bp-640px: 40em 
   bp-800px: 55em 
    bp-1040px: 65em 
   bp-1300px: 81.25em 
@@ -42,7 +42,7 @@
   */
 }
 
-@media screen and (min-width: 37.5em) {
+@media screen and (min-width: 40em) {
   :root {
     --header-height: 4rem;
   }
@@ -187,27 +187,33 @@ input {
 .home-container-center,
 .home-container-right,
 .home-container-left {
-  width: 95%;
+  width: 90%;
   margin: 0 auto;
-  padding-block: var(--pad-block-tiny);
+}
+
+@media screen and (min-width: 40em) {
+  .home-container-center,
+  .home-container-right,
+  .home-container-left {
+    width: 85%;
+    margin: 0 auto;
+  }
 }
 
 @media screen and (min-width: 65em) {
   .home-container-center {
-    width: 75%;
+    width: 90%;
     margin: 0 auto;
-    padding-block: var(--pad-block-medium);
   }
 
   .home-container-right {
-    width: 87.5%;
-    margin-left: auto;
-    margin-bottom: var(--pad-block-medium);
+    width: 92.5%;
+    margin: 0 0 var(--pad-block-medium) auto;
   }
 
   .home-container-left {
-    width: 87.5%;
-    margin-left: auto;
+    width: 92.5%;
+    margin: 0 0 0 auto;
   }
 }
 

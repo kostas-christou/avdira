@@ -155,103 +155,128 @@ function openInternalMobileMenu(menuIndex = 0) {
 }
 
 // Hamburger menu event-listener
-// Large screens
-if (hamMenu && mediaQueryMin1300.matches) {
+if (hamMenu) {
   hamMenu.addEventListener('click', (e) => {
     e.stopPropagation();
-
-    if (hamMenu.classList.contains('header__ham-menu--open')) {
+    // Large screens
+    if (
+      mediaQueryMin1300.matches &&
+      hamMenu.classList.contains('header__ham-menu--open')
+    ) {
       openDesktopMenu();
-    } else {
+    } else if (
+      mediaQueryMin1300.matches &&
+      !hamMenu.classList.contains('header__ham-menu--open')
+    ) {
       closeDesktopMenu();
-    }
-  });
-}
-
-// Small screens
-if (hamMenu && mediaQueryMax1300.matches) {
-  hamMenu.addEventListener('click', (e) => {
-    e.stopPropagation();
-
-    if (hamMenu.classList.contains('header__ham-menu--open')) {
+      // Small screens
+    } else if (
+      mediaQueryMax1300.matches &&
+      hamMenu.classList.contains('header__ham-menu--open')
+    ) {
       openMobileMenu();
-    } else {
+    } else if (
+      mediaQueryMax1300.matches &&
+      !hamMenu.classList.contains('header__ham-menu--open')
+    ) {
       closeMobileMenu();
     }
   });
 }
 
 // Open internal menus on nav-link click
-// Large screens
-if (expandLinks.length > 0 && mediaQueryMin1300.matches) {
+if (expandLinks.length > 0) {
   expandLinks.forEach((expandLink, index) => {
     expandLink.addEventListener('click', (e) => {
       e.stopPropagation();
-      openDesktopMenu(index);
+      // Large screens
+      if (mediaQueryMin1300.matches) {
+        openDesktopMenu(index);
+        // Small screens
+      } else if (mediaQueryMax1300.matches) {
+        openInternalMobileMenu(index);
+      }
     });
   });
 }
 
 // Small screens
-if (expandLinks.length > 0 && mediaQueryMax1300.matches) {
-  expandLinks.forEach((expandLink, index) => {
-    expandLink.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openInternalMobileMenu(index);
-    });
-  });
-}
+// if (expandLinks.length > 0 && mediaQueryMax1300.matches) {
+//   expandLinks.forEach((expandLink, index) => {
+//     expandLink.addEventListener('click', (e) => {
+//       e.stopPropagation();
+//       openInternalMobileMenu(index);
+//     });
+//   });
+// }
 
 // Close all open menus when clicking outside
-// Large screens
-if (mediaQueryMin1300.matches) {
-  document.addEventListener('click', (e) => {
-    const openMenuLeft = document.querySelector(
-      '.full-menu--left.full-menu--expand'
-    );
-    const openMenuRight = document.querySelector(
-      '.full-menu--right.full-menu--expand'
-    );
 
-    if (
-      openMenuLeft &&
-      openMenuRight &&
-      !openMenuLeft.contains(e.target) &&
-      !openMenuRight.contains(e.target)
-    ) {
-      closeDesktopMenu();
-    }
-  });
-}
+document.addEventListener('click', (e) => {
+  const openMenuLeft = document.querySelector(
+    '.full-menu--left.full-menu--expand'
+  );
+  const openMenuRight = document.querySelector(
+    '.full-menu--right.full-menu--expand'
+  );
+  // Large screens
+  if (
+    mediaQueryMin1300.matches &&
+    openMenuLeft &&
+    openMenuRight &&
+    !openMenuLeft.contains(e.target) &&
+    !openMenuRight.contains(e.target)
+  ) {
+    closeDesktopMenu();
+    // Small screens
+  } else if (
+    mediaQueryMax1300.matches &&
+    openMenuLeft &&
+    openMenuRight &&
+    !openMenuLeft.contains(e.target) &&
+    !openMenuRight.contains(e.target)
+  ) {
+    closeMobileMenu();
+  } else if (
+    mediaQueryMax1300.matches &&
+    !openMenuLeft &&
+    openMenuRight &&
+    headerNav &&
+    !openMenuRight.contains(e.target) &&
+    !headerNav.contains(e.target)
+  ) {
+    closeMobileMenu();
+  }
+});
 
 // Small screens
-if (mediaQueryMax1300.matches) {
-  document.addEventListener('click', (e) => {
-    const openMenuLeft = document.querySelector(
-      '.full-menu--left.full-menu--expand'
-    );
-    const openMenuRight = document.querySelector(
-      '.full-menu--right.full-menu--expand'
-    );
+// if (mediaQueryMax1300.matches) {
+//   document.addEventListener('click', (e) => {
+//     const openMenuLeft = document.querySelector(
+//       '.full-menu--left.full-menu--expand'
+//     );
+//     const openMenuRight = document.querySelector(
+//       '.full-menu--right.full-menu--expand'
+//     );
 
-    if (
-      openMenuLeft &&
-      openMenuRight &&
-      !openMenuLeft.contains(e.target) &&
-      !openMenuRight.contains(e.target)
-    ) {
-      closeMobileMenu();
-    } else if (
-      !openMenuLeft &&
-      openMenuRight &&
-      headerNav &&
-      !openMenuRight.contains(e.target) &&
-      !headerNav.contains(e.target)
-    ) {
-      closeMobileMenu();
-    }
-  });
-}
+//     if (
+//       openMenuLeft &&
+//       openMenuRight &&
+//       !openMenuLeft.contains(e.target) &&
+//       !openMenuRight.contains(e.target)
+//     ) {
+//       closeMobileMenu();
+//     } else if (
+//       !openMenuLeft &&
+//       openMenuRight &&
+//       headerNav &&
+//       !openMenuRight.contains(e.target) &&
+//       !headerNav.contains(e.target)
+//     ) {
+//       closeMobileMenu();
+//     }
+//   });
+// }
 
 // Back-to-top button functionality
 if (backToTop) {
@@ -320,7 +345,7 @@ const meetingsSwiper = new Swiper('.meetings__swiper', {
   spaceBetween: 20,
   grabCursor: true,
   breakpoints: {
-    1050: {
+    1040: {
       slidesPerView: 1.4,
       spaceBetween: 30,
     },
@@ -344,7 +369,7 @@ const quickAccessSwiper = new Swiper('.quick-access__swiper', {
   spaceBetween: 20,
   grabCursor: true,
   breakpoints: {
-    850: {
+    1040: {
       slidesPerView: 1.5,
       spaceBetween: 20,
     },
@@ -368,7 +393,7 @@ const civilProtectionSwiper = new Swiper('.civil-protection__swiper', {
   spaceBetween: 20,
   grabCursor: true,
   breakpoints: {
-    850: {
+    1040: {
       slidesPerView: 1.5,
       spaceBetween: 20,
     },

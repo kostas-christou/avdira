@@ -290,7 +290,7 @@ function showVideo(e) {
   videoOverlay.style.display = 'none';
 }
 
-// Calendar functionality
+// Calendar initialization
 if (document.getElementById('color-calendar')) {
   new Calendar({
     id: '#color-calendar',

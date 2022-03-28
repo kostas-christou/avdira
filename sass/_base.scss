@@ -36,7 +36,7 @@
   /*
   bp-640px: 40em 
   bp-800px: 55em 
-   bp-1040px: 65em 
+  bp-1040px: 65em 
   bp-1366px: 85.375em 
   bp-1040px: 65em 
   */
@@ -208,13 +208,23 @@ input {
   }
 
   .home-container-right {
-    width: 92.5%;
+    width: 95%;
     margin: 0 0 var(--pad-block-medium) auto;
   }
 
   .home-container-left {
-    width: 92.5%;
+    width: 95%;
     margin: 0 0 0 auto;
+  }
+}
+
+@media screen and (min-width: 160em) {
+  .home-container-center,
+  .home-container-right,
+  .home-container-left {
+    // width: 90%;
+    max-width: 1800px;
+    margin: 0 auto;
   }
 }
 

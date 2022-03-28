@@ -48,7 +48,6 @@
 }
 
 /* Media queries for layouts */
-
 @media screen and (min-width: 55em) {
   .parallax-wrapper {
     height: 100%;
@@ -56,11 +55,8 @@
 
     overflow-x: hidden;
     overflow-y: auto;
-    // perspective: 100px;
 
     margin: 0 auto;
-
-    position: relative;
   }
 
   .aside {

@@ -121,7 +121,6 @@
 
   &__weather {
     & p {
-      // margin-left: 0.25rem;
       font-size: 0.875rem;
     }
   }
@@ -700,6 +699,11 @@
   }
 
   &__accessibility {
+    & button {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
   }
 }
 /* Aside nav right styling end */

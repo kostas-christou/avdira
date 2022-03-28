@@ -198,6 +198,10 @@ input {
     margin: 0 auto;
   }
 }
+#accessibilityBar.active {
+  transform: translateX(0);
+}
+
 .hide {
   opacity: 0;
   visibility: hidden;
@@ -859,6 +863,64 @@ input {
 }
 
 /* Back-to-top button end */
+/* Accessibility widget */
+#accessibilityBar {
+  position: fixed;
+  bottom: 0.5rem;
+  right: var(--header-height);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(calc(100% + var(--header-height)));
+  background-color: var(--color-white);
+  border: 3px solid var(--color-primary-light);
+  border-radius: 5px;
+  box-shadow: 0 5px 5px rgba(34, 34, 34, 0);
+  z-index: 9998;
+  transition: transform 0.5s ease-in-out;
+}
+#accessibilityBar button {
+  padding: 0.5em;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.25s ease-in-out;
+}
+#accessibilityBar button:hover {
+  background-color: var(--color-secondary-light);
+}
+#accessibilityBar button:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: var(--color-primary-light);
+}
+
+body.accessibility_readingLine #readingLine {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 0.5rem;
+  background-color: #ef3934;
+  z-index: 9999;
+}
+
+body.accessibility_markerLine #markerLine {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 1.75rem;
+  transform: translateY(-1rem);
+  background-color: #e4fd00;
+  opacity: 0.75;
+  z-index: 9999;
+}
+
 /* Components end */
 /* Hamburger menu animation */
 /* Card animation */
@@ -1405,6 +1467,12 @@ input {
 .aside__youtube {
   margin-bottom: 10vh;
 }
+.aside__accessibility button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 /* Aside nav right styling end */
 /* Hero section styling start */
 .hero {

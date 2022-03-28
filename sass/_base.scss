@@ -222,10 +222,13 @@ input {
   .home-container-center,
   .home-container-right,
   .home-container-left {
-    // width: 90%;
     max-width: 1800px;
     margin: 0 auto;
   }
+}
+
+#accessibilityBar.active {
+  transform: translateX(0);
 }
 
 .hide {

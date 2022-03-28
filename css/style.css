@@ -1,7 +1,7 @@
 :root {
   /* Color CSS variables */
-  --color-secondary-dark: #f36e23;
-  --color-secondary: #ffb794;
+  --color-secondary: #f36e23;
+  --color-secondary-light: #ffb794;
   --color-primary: #07116b;
   --color-primary-light: hsl(234, 88%, 40%);
   --color-primary-extra-light: #5960a748;
@@ -33,7 +33,7 @@
   bp-640px: 40em 
   bp-800px: 55em 
    bp-1040px: 65em 
-  bp-1300px: 81.25em 
+  bp-1366px: 85.375em 
   bp-1040px: 65em 
   */
 }
@@ -43,9 +43,10 @@
     --header-height: 4rem;
   }
 }
-@media screen and (min-width: 81.25em) {
+@media screen and (min-width: 85.375em) {
   :root {
     --header-height: 5rem;
+    --footer-height: 50vh;
   }
 }
 /* Global reset */
@@ -63,7 +64,7 @@
 }
 
 *::placeholder {
-  font-size: 2rem;
+  font-size: clamp(0.875rem, 0.5rem + 1.5vw, 2rem);
   opacity: 0.7;
   color: var(--color-secondary-dark);
 }
@@ -414,8 +415,8 @@ input {
   transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out;
 }
 .intro__circle--content:hover {
-  background-color: var(--color-secondary);
-  border-color: var(--color-secondary);
+  background-color: var(--color-secondary-light);
+  border-color: var(--color-secondary-light);
 }
 .intro__circle--content a {
   font-size: clamp(0.75rem, 0.715rem + 0.16vw, 0.875rem);
@@ -482,6 +483,18 @@ input {
 }
 
 @media screen and (min-width: 65em) {
+  .hero-card {
+    padding: 2rem;
+  }
+  .hero-card__title {
+    margin-bottom: 3rem;
+  }
+  .hero-card__text {
+    max-width: 40ch;
+    margin-bottom: 3rem;
+  }
+}
+@media screen and (hover: hover) {
   .hero-card {
     padding: 2rem;
   }
@@ -553,11 +566,10 @@ input {
   color: var(--color-primary);
 }
 .welcome-card--secondary .welcome-card__overlay {
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary-light);
 }
 
-/* Media queries for welcome card */
-@media screen and (min-width: 65em) {
+@media screen and (hover: hover) {
   .welcome-card__title {
     margin-bottom: 4rem;
     animation: titleSlideOut 1s ease forwards;
@@ -612,27 +624,28 @@ input {
 }
 .news-card__link-container:hover {
   padding: 1em 4em 1em 1em;
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary-light);
 }
 .news-card__link {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s ease-in-out, visibility 0.25s ease;
-}
-.news-card:hover .news-card__img-container img {
-  transform: scale(1.15);
-}
-.news-card:hover .news-card__link {
   opacity: 1;
   visibility: visible;
 }
 
 /* Media queries for news-card */
-.news-card__link {
-  opacity: 1;
-  visibility: visible;
+@media screen and (hover: hover) {
+  .news-card__link {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease-in-out;
+  }
+  .news-card:hover .news-card__img-container img {
+    transform: scale(1.15);
+  }
+  .news-card:hover .news-card__link {
+    opacity: 1;
+    visibility: visible;
+  }
 }
-
 /* News-card end */
 /* Civil-protection card start */
 .cp-card {
@@ -791,7 +804,7 @@ input {
   width: clamp(2.75rem, 2.3333rem + 1.6667vw, 4rem);
   aspect-ratio: 1;
   border-radius: 50%;
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary-light);
   cursor: pointer;
 }
 .slider-btn-next.swiper-button-disabled,
@@ -816,7 +829,7 @@ input {
     padding-block: 4rem;
   }
 }
-@media screen and (min-width: 81.25em) {
+@media screen and (min-width: 85.375em) {
   .footer-separator {
     padding-block: 6rem;
   }
@@ -919,13 +932,14 @@ input {
   left: 0;
   right: var(--header-height);
   transform: translateX(calc(100% + var(--header-height)));
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary-light);
   transition: transform 0.5s ease-in-out;
 }
 .header__nav-list {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   gap: 0.75rem;
   margin-top: 1.5rem;
   padding-inline: 1rem;
@@ -1046,7 +1060,7 @@ input {
     align-items: center;
   }
 }
-@media screen and (min-width: 81.25em) {
+@media screen and (min-width: 85.375em) {
   .header .header {
     gap: 1.5rem;
   }
@@ -1091,7 +1105,7 @@ input {
   bottom: 0;
   right: var(--header-height);
   padding: 1rem 1rem 1rem 4rem;
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary-light);
   z-index: 99;
 }
 .full-menu--right {
@@ -1118,7 +1132,7 @@ input {
   left: 0;
   bottom: 0;
   right: var(--header-height);
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary-light);
   z-index: 97;
 }
 .full-menu--collapse.full-menu--left {
@@ -1175,7 +1189,7 @@ input {
 }
 .full-menu--1 {
   display: block;
-  padding-inline: 10%;
+  padding: 1rem 1rem 1rem 4rem;
 }
 .full-menu__services {
   display: grid;
@@ -1204,29 +1218,28 @@ input {
   flex-direction: column;
   justify-content: flex-start;
   gap: 5rem;
-  padding-left: 8%;
 }
 .full-menu__search-form {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   gap: 2rem;
-  min-width: 75%;
-  border-bottom: 2px solid var(--color-primary);
+  min-width: 85%;
 }
 .full-menu__search-input {
   padding: 1rem 0rem;
   width: 100%;
   border: none;
   outline: none;
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary-light);
+  border-bottom: 2px solid var(--color-primary);
 }
 .full-menu__search-btn {
   margin-bottom: 0.5rem;
 }
 .full-menu__search-btn .btn-sliding__overlay {
-  background-color: var(--color-secondary-dark);
+  background-color: var(--color-secondary);
 }
 .full-menu__contact ul {
   gap: 1rem;
@@ -1237,7 +1250,43 @@ input {
 }
 
 /* Media queries for expandable menu */
-@media screen and (min-width: 81.25em) {
+@media screen and (min-width: 40em) {
+  .full-menu--left {
+    padding: 1.5rem 1.5rem 1.5rem 5rem;
+  }
+  .full-menu__back-btn {
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+  .full-menu__search-form {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-primary);
+  }
+  .full-menu__search-input {
+    border: none;
+  }
+}
+@media screen and (min-width: 55em) {
+  .full-menu--left {
+    padding: 2rem 2rem 2rem 6rem;
+  }
+  .full-menu__back-btn {
+    top: 2rem;
+    left: 2rem;
+  }
+}
+@media screen and (min-width: 65em) {
+  .full-menu--left {
+    padding: 2.5rem 2.5rem 2.5rem 7rem;
+  }
+  .full-menu__back-btn {
+    top: 2.5rem;
+    left: 2.5rem;
+  }
+}
+@media screen and (min-width: 85.375em) {
   .full-menu {
     flex-direction: row;
     top: var(--header-height);
@@ -1249,7 +1298,8 @@ input {
     left: var(--header-height);
     bottom: 10%;
     width: calc((100% - var(--header-height) * 2) * 0.75);
-    justify-content: space-around;
+    justify-content: flex-start;
+    gap: 3rem;
     z-index: 99;
   }
   .full-menu--left .full-menu__link::before {
@@ -1288,11 +1338,22 @@ input {
   .full-menu--collapse.full-menu--right {
     transform: translateX(calc(100% + var(--header-height)));
   }
+  .full-menu__back-btn {
+    display: none;
+  }
   .full-menu--1 {
-    padding-inline: 5%;
+    padding-inline: 10%;
+  }
+  .full-menu--5 {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5rem;
   }
   .full-menu__img-wrapper {
     display: unset;
+  }
+  .full-menu__municipality, .full-menu__services, .full-menu__administration, .full-menu__culture, .full-menu__tourism {
+    flex-shrink: 0;
   }
 }
 /* Expandable menu styling end */
@@ -1643,7 +1704,7 @@ input {
   grid-area: policy;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: end;
   justify-content: center;
   gap: 0.5rem;
 }
@@ -1710,10 +1771,10 @@ input {
   }
   .footer__link-list {
     justify-items: start;
-    row-gap: 50%;
+    row-gap: 12vh;
   }
 }
-@media screen and (min-width: 81.25em) {
+@media screen and (min-width: 85.375em) {
   .footer__logo-container img {
     width: 100%;
   }

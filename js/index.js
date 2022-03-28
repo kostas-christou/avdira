@@ -5,11 +5,12 @@ const asideRight = document.querySelector('.aside--right');
 const fullMenusLeft = document.querySelectorAll('.full-menu--left');
 const fullMenuRight = document.querySelector('.full-menu--right');
 const fullMenuOverlay = document.querySelector('.full-menu__overlay');
+const fullMenuBackButtons = document.querySelectorAll('.full-menu__back-btn');
 const parallaxWrapper = document.querySelector('.parallax-wrapper');
 const backToTop = document.querySelector('.back-to-top');
-const mediaQueryMax800 = window.matchMedia('(max-width: 54.99em)');
-const mediaQueryMax1300 = window.matchMedia('(max-width: 81.24em)');
-const mediaQueryMin1300 = window.matchMedia('(min-width: 81.25em)');
+const mediaQueryMax880 = window.matchMedia('(max-width: 54.99em)');
+const mediaQueryMax1366 = window.matchMedia('(max-width: 85.374em)');
+const mediaQueryMin1366 = window.matchMedia('(min-width: 85.375em)');
 
 // Functionality for mega menu both for mobile and desktop
 function openDesktopMenu(menuIndex = 0) {
@@ -73,7 +74,7 @@ function openMobileMenu(menuIndex = 0) {
   hamMenu.classList.remove('header__ham-menu--open');
   hamMenu.classList.add('header__ham-menu--close');
   // For small screens show the right aside
-  if (mediaQueryMax800.matches) {
+  if (mediaQueryMax880.matches) {
     asideRight.style.transform = 'translateX(0)';
   }
   // Show the overlay
@@ -93,7 +94,7 @@ function closeMobileMenu(menuIndex = 0) {
   hamMenu.classList.remove('header__ham-menu--close');
   hamMenu.classList.add('header__ham-menu--open');
   // For small screens hide the right aside
-  if (mediaQueryMax800.matches) {
+  if (mediaQueryMax880.matches) {
     asideRight.style.transform = 'translateX(100%)';
   }
   // Hhide the header navbar
@@ -121,7 +122,7 @@ function openInternalMobileMenu(menuIndex = 0) {
   hamMenu.classList.remove('header__ham-menu--open');
   hamMenu.classList.add('header__ham-menu--close');
   // For small screens show the right aside
-  if (mediaQueryMax800.matches) {
+  if (mediaQueryMax880.matches) {
     asideRight.style.transform = 'translateX(0)';
   }
   // Hide the main nav menu on small screens
@@ -160,23 +161,23 @@ if (hamMenu) {
     e.stopPropagation();
     // Large screens
     if (
-      mediaQueryMin1300.matches &&
+      mediaQueryMin1366.matches &&
       hamMenu.classList.contains('header__ham-menu--open')
     ) {
       openDesktopMenu();
     } else if (
-      mediaQueryMin1300.matches &&
+      mediaQueryMin1366.matches &&
       !hamMenu.classList.contains('header__ham-menu--open')
     ) {
       closeDesktopMenu();
       // Small screens
     } else if (
-      mediaQueryMax1300.matches &&
+      mediaQueryMax1366.matches &&
       hamMenu.classList.contains('header__ham-menu--open')
     ) {
       openMobileMenu();
     } else if (
-      mediaQueryMax1300.matches &&
+      mediaQueryMax1366.matches &&
       !hamMenu.classList.contains('header__ham-menu--open')
     ) {
       closeMobileMenu();
@@ -190,28 +191,17 @@ if (expandLinks.length > 0) {
     expandLink.addEventListener('click', (e) => {
       e.stopPropagation();
       // Large screens
-      if (mediaQueryMin1300.matches) {
+      if (mediaQueryMin1366.matches) {
         openDesktopMenu(index);
         // Small screens
-      } else if (mediaQueryMax1300.matches) {
+      } else if (mediaQueryMax1366.matches) {
         openInternalMobileMenu(index);
       }
     });
   });
 }
 
-// Small screens
-// if (expandLinks.length > 0 && mediaQueryMax1300.matches) {
-//   expandLinks.forEach((expandLink, index) => {
-//     expandLink.addEventListener('click', (e) => {
-//       e.stopPropagation();
-//       openInternalMobileMenu(index);
-//     });
-//   });
-// }
-
 // Close all open menus when clicking outside
-
 document.addEventListener('click', (e) => {
   const openMenuLeft = document.querySelector(
     '.full-menu--left.full-menu--expand'
@@ -221,7 +211,7 @@ document.addEventListener('click', (e) => {
   );
   // Large screens
   if (
-    mediaQueryMin1300.matches &&
+    mediaQueryMin1366.matches &&
     openMenuLeft &&
     openMenuRight &&
     !openMenuLeft.contains(e.target) &&
@@ -230,7 +220,7 @@ document.addEventListener('click', (e) => {
     closeDesktopMenu();
     // Small screens
   } else if (
-    mediaQueryMax1300.matches &&
+    mediaQueryMax1366.matches &&
     openMenuLeft &&
     openMenuRight &&
     !openMenuLeft.contains(e.target) &&
@@ -238,7 +228,7 @@ document.addEventListener('click', (e) => {
   ) {
     closeMobileMenu();
   } else if (
-    mediaQueryMax1300.matches &&
+    mediaQueryMax1366.matches &&
     !openMenuLeft &&
     openMenuRight &&
     headerNav &&
@@ -249,34 +239,17 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Small screens
-// if (mediaQueryMax1300.matches) {
-//   document.addEventListener('click', (e) => {
-//     const openMenuLeft = document.querySelector(
-//       '.full-menu--left.full-menu--expand'
-//     );
-//     const openMenuRight = document.querySelector(
-//       '.full-menu--right.full-menu--expand'
-//     );
+// Mega menu back button functionality on mobile devices
+if (fullMenuBackButtons.length > 0) {
+  fullMenuBackButtons.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
 
-//     if (
-//       openMenuLeft &&
-//       openMenuRight &&
-//       !openMenuLeft.contains(e.target) &&
-//       !openMenuRight.contains(e.target)
-//     ) {
-//       closeMobileMenu();
-//     } else if (
-//       !openMenuLeft &&
-//       openMenuRight &&
-//       headerNav &&
-//       !openMenuRight.contains(e.target) &&
-//       !headerNav.contains(e.target)
-//     ) {
-//       closeMobileMenu();
-//     }
-//   });
-// }
+      closeMobileMenu();
+      openMobileMenu();
+    });
+  });
+}
 
 // Back-to-top button functionality
 if (backToTop) {

@@ -41,7 +41,7 @@
 
     transform: translateX(calc(100% + var(--header-height)));
 
-    background-color: var(--color-secondary);
+    background-color: var(--color-secondary-light);
     transition: transform 0.5s ease-in-out;
   }
 
@@ -49,6 +49,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     gap: 0.75rem;
 
     margin-top: 1.5rem;
@@ -221,7 +222,7 @@
     }
   }
 
-  @media screen and (min-width: 81.25em) {
+  @media screen and (min-width: 85.375em) {
     .header {
       gap: 1.5rem;
 
@@ -268,7 +269,7 @@
     right: var(--header-height);
 
     padding: 1rem 1rem 1rem 4rem;
-    background-color: var(--color-secondary);
+    background-color: var(--color-secondary-light);
 
     z-index: 99;
   }
@@ -309,7 +310,7 @@
     bottom: 0;
     right: var(--header-height);
 
-    background-color: var(--color-secondary);
+    background-color: var(--color-secondary-light);
     z-index: 97;
   }
 
@@ -387,7 +388,7 @@
   /* full-menu--1 */
   &--1 {
     display: block;
-    padding-inline: 10%;
+    padding: 1rem 1rem 1rem 4rem;
   }
 
   &__services {
@@ -433,18 +434,16 @@
     flex-direction: column;
     justify-content: flex-start;
     gap: 5rem;
-    padding-left: 8%;
   }
 
   &__search-form {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: 2rem;
 
-    min-width: 75%;
-    border-bottom: 2px solid var(--color-primary);
+    min-width: 85%;
   }
 
   &__search-input {
@@ -452,14 +451,15 @@
     width: 100%;
     border: none;
     outline: none;
-    background-color: var(--color-secondary);
+    background-color: var(--color-secondary-light);
+    border-bottom: 2px solid var(--color-primary);
   }
 
   &__search-btn {
     margin-bottom: 0.5rem;
 
     & .btn-sliding__overlay {
-      background-color: var(--color-secondary-dark);
+      background-color: var(--color-secondary);
     }
   }
 
@@ -476,7 +476,55 @@
   }
 }
 /* Media queries for expandable menu */
-@media screen and (min-width: 81.25em) {
+@media screen and (min-width: 40em) {
+  .full-menu {
+    &--left {
+      padding: 1.5rem 1.5rem 1.5rem 5rem;
+    }
+
+    &__back-btn {
+      top: 1.5rem;
+      left: 1.5rem;
+    }
+
+    &__search-form {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--color-primary);
+    }
+
+    &__search-input {
+      border: none;
+    }
+  }
+}
+
+@media screen and (min-width: 55em) {
+  .full-menu {
+    &--left {
+      padding: 2rem 2rem 2rem 6rem;
+    }
+    &__back-btn {
+      top: 2rem;
+      left: 2rem;
+    }
+  }
+}
+
+@media screen and (min-width: 65em) {
+  .full-menu {
+    &--left {
+      padding: 2.5rem 2.5rem 2.5rem 7rem;
+    }
+    &__back-btn {
+      top: 2.5rem;
+      left: 2.5rem;
+    }
+  }
+}
+
+@media screen and (min-width: 85.375em) {
   .full-menu {
     flex-direction: row;
 
@@ -491,7 +539,8 @@
       bottom: 10%;
       width: calc(((100% - (var(--header-height) * 2)) * 0.75));
 
-      justify-content: space-around;
+      justify-content: flex-start;
+      gap: 3rem;
       z-index: 99;
 
       & .full-menu__link::before {
@@ -550,12 +599,30 @@
       }
     }
 
+    &__back-btn {
+      display: none;
+    }
+
     &--1 {
-      padding-inline: 5%;
+      padding-inline: 10%;
+    }
+
+    &--5 {
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 5rem;
     }
 
     &__img-wrapper {
       display: unset;
+    }
+
+    &__municipality,
+    &__services,
+    &__administration,
+    &__culture,
+    &__tourism {
+      flex-shrink: 0;
     }
 
     &__services {
@@ -1037,7 +1104,7 @@
 
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: end;
     justify-content: center;
     gap: 0.5rem;
   }
@@ -1125,7 +1192,7 @@
 
     &__link-list {
       justify-items: start;
-      row-gap: 50%;
+      row-gap: 12vh;
     }
 
     &__list-item {
@@ -1134,7 +1201,7 @@
   }
 }
 
-@media screen and (min-width: 81.25em) {
+@media screen and (min-width: 85.375em) {
   .footer {
     &__logo-container img {
       width: 100%;

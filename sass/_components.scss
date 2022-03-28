@@ -192,8 +192,8 @@
         border-color 0.25s ease-in-out;
 
       &:hover {
-        background-color: var(--color-secondary);
-        border-color: var(--color-secondary);
+        background-color: var(--color-secondary-light);
+        border-color: var(--color-secondary-light);
       }
 
       & a {
@@ -285,6 +285,21 @@
 }
 // Media queries for hero-card
 @media screen and (min-width: 65em) {
+  .hero-card {
+    padding: 2rem;
+
+    &__title {
+      margin-bottom: 3rem;
+    }
+
+    &__text {
+      max-width: 40ch;
+      margin-bottom: 3rem;
+    }
+  }
+}
+
+@media screen and (hover: hover) {
   .hero-card {
     padding: 2rem;
 
@@ -385,12 +400,12 @@
     }
 
     & .welcome-card__overlay {
-      background-color: var(--color-secondary);
+      background-color: var(--color-secondary-light);
     }
   }
 }
-/* Media queries for welcome card */
-@media screen and (min-width: 65em) {
+
+@media screen and (hover: hover) {
   .welcome-card {
     &__title {
       margin-bottom: 4rem;
@@ -462,33 +477,34 @@
 
     &:hover {
       padding: 1em 4em 1em 1em;
-      background-color: var(--color-secondary);
+      background-color: var(--color-secondary-light);
     }
   }
 
   &__link {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.25s ease-in-out, visibility 0.25s ease;
-  }
-
-  &:hover {
-    & .news-card__img-container img {
-      transform: scale(1.15);
-    }
-
-    & .news-card__link {
-      opacity: 1;
-      visibility: visible;
-    }
+    opacity: 1;
+    visibility: visible;
   }
 }
 
 /* Media queries for news-card */
-.news-card {
-  &__link {
-    opacity: 1;
-    visibility: visible;
+@media screen and (hover: hover) {
+  .news-card {
+    &__link {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease-in-out;
+    }
+    &:hover {
+      & .news-card__img-container img {
+        transform: scale(1.15);
+      }
+
+      & .news-card__link {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
   }
 }
 /* News-card end */
@@ -689,7 +705,7 @@
   width: clamp(2.75rem, 2.3333rem + 1.6667vw, 4rem);
   aspect-ratio: 1;
   border-radius: 50%;
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary-light);
 
   cursor: pointer;
 
@@ -717,7 +733,7 @@
   }
 }
 
-@media screen and (min-width: 81.25em) {
+@media screen and (min-width: 85.375em) {
   .footer-separator {
     padding-block: 6rem;
   }

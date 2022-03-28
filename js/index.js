@@ -11,6 +11,18 @@ const backToTop = document.querySelector('.back-to-top');
 const mediaQueryMax880 = window.matchMedia('(max-width: 54.99em)');
 const mediaQueryMax1366 = window.matchMedia('(max-width: 85.374em)');
 const mediaQueryMin1366 = window.matchMedia('(min-width: 85.375em)');
+const weatherTemp = document.querySelector('.header__weather-temp');
+const weatherIcon = document.querySelector('.header__weather-icon');
+
+// Fetch weather info from external API (weatherapi.com)
+document.addEventListener('DOMContentLoaded', async () => {
+  const response = await axios.get(
+    'http://api.weatherapi.com/v1/current.json?key=92eab374f8c14f52bb4115634221403&q=40.981473,84.95146'
+  );
+
+  weatherIcon.src = `${response.data.current.condition.icon}`;
+  weatherTemp.innerHTML = `${response.data.current.temp_c} <sup>o</sup>C`;
+});
 
 // Functionality for mega menu both for mobile and desktop
 function openDesktopMenu(menuIndex = 0) {

@@ -1001,7 +1001,6 @@ input {
   stroke: var(--color-primary);
 }
 .header__weather p {
-  margin-left: 0.25rem;
   font-size: 0.875rem;
 }
 .header__ham-menu {

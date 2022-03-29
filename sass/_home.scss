@@ -879,12 +879,12 @@
 
   &__img-wrapper {
     min-height: 15rem;
-    width: 100%;
+    width: min(100%, 35rem);
 
     background-image: url('../assets/images/calendar_image.jpg');
 
     background-size: cover;
-    background-position: top center;
+    background-position: center;
     background-repeat: no-repeat;
 
     position: relative;

@@ -170,9 +170,10 @@ function initializeAccessibilityWidget() {
   });
 
   // Open accessibility bar
-  btnAccessibilityBar.addEventListener('click', () =>
-    accessibilityBar.classList.toggle('active')
-  );
+  btnAccessibilityBar.addEventListener('click', (e) => {
+    e.stopPropagation();
+    accessibilityBar.classList.toggle('active');
+  });
 
   // Toggle accessibilities
   function toggleAccessibilities(action) {
@@ -208,9 +209,10 @@ function initializeAccessibilityWidget() {
   }
 
   btnAccessibility.forEach((button) =>
-    button.addEventListener('click', () =>
-      toggleAccessibilities(button.dataset.accessibility)
-    )
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleAccessibilities(button.dataset.accessibility);
+    })
   );
 
   // Font size
@@ -331,7 +333,7 @@ function initializeAccessibilityWidget() {
 
   function toggleContrast() {
     this.setState(!this.currentState);
-    Dark.currentState === true ? Dark.setState(false) : null;
+    // Dark.currentState === true ? Dark.setState(false) : null;
   }
 }
 

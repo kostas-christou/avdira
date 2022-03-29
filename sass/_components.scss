@@ -355,7 +355,7 @@
   position: relative;
 
   &__content-box {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     overflow: hidden;
 
     z-index: 20;
@@ -517,7 +517,7 @@
   justify-content: space-between;
   padding: 3rem;
   width: 100%;
-  min-height: 15rem;
+  height: clamp(14rem, 30vh, 20rem);
 
   background-size: cover;
   background-position: center;
@@ -761,7 +761,7 @@
 }
 /* Back-to-top button end */
 
-/* Accessibility widget */
+/* Accessibility widget start */
 #accessibilityBar {
   position: fixed;
   bottom: 0.5rem;
@@ -775,11 +775,10 @@
   background-color: var(--color-white);
   border: 3px solid var(--color-primary-light);
   border-radius: 5px;
-  box-shadow: 0 5px 5px rgb(34 34 34 / 0%);
 
   z-index: 9998;
 
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, box-shadow 0.25s ease-in-out 0.25s;
 
   & button {
     padding: 0.5em;
@@ -792,7 +791,7 @@
     transition: background-color 0.25s ease-in-out;
 
     &:hover {
-      background-color: var(--color-secondary-light);
+      background-color: var(--color-secondary);
     }
   }
 
@@ -807,6 +806,11 @@
       background-color: var(--color-primary-light);
     }
   }
+}
+
+#accessibilityBar.active {
+  transform: translateX(0);
+  box-shadow: 0 5px 15px 10px rgb(34 34 34 / 20%);
 }
 
 body.accessibility_readingLine #readingLine {
@@ -835,8 +839,12 @@ body.accessibility_markerLine #markerLine {
   z-index: 9999;
 }
 
-// body.contrast {
-//   background-color: #000 !important;
-//   color: #e4fd00 !important;
-// }
+body.contrast * {
+  background-color: #000 !important;
+  color: #e4fd00 !important;
+  fill: #e4fd00 !important;
+  stroke: #e4fd00 !important;
+}
+/* Accessibility widget end */
+
 /* Components end */

@@ -69,6 +69,10 @@ function closeDesktopMenu(menuIndex = 0) {
   // Hide the right part of the full menu
   fullMenuRight.classList.remove('full-menu--expand');
   fullMenuRight.classList.add('full-menu--collapse');
+  // Hide the accessibility menu
+  const accessibilityMenu = document.getElementById('accessibilityBar');
+  accessibilityMenu.classList.remove('active');
+
   // Hide the overlay
   fullMenuOverlay.classList.remove('appear');
   fullMenuOverlay.classList.add('disappear');
@@ -122,6 +126,9 @@ function closeMobileMenu(menuIndex = 0) {
   // Hide the right part of the full menu
   fullMenuRight.classList.remove('full-menu--expand');
   fullMenuRight.classList.add('full-menu--collapse');
+  // Hide the accessibility menu
+  const accessibilityMenu = document.getElementById('accessibilityBar');
+  accessibilityMenu.classList.remove('active');
   // Hide the overlay
   // fullMenuOverlay.classList.remove('appear');
   // fullMenuOverlay.classList.add('disappear');

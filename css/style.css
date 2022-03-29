@@ -198,10 +198,6 @@ input {
     margin: 0 auto;
   }
 }
-#accessibilityBar.active {
-  transform: translateX(0);
-}
-
 .hide {
   opacity: 0;
   visibility: hidden;
@@ -549,7 +545,7 @@ input {
   position: relative;
 }
 .welcome-card__content-box {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   overflow: hidden;
   z-index: 20;
 }
@@ -666,7 +662,7 @@ input {
   justify-content: space-between;
   padding: 3rem;
   width: 100%;
-  min-height: 15rem;
+  height: clamp(14rem, 30vh, 20rem);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -863,7 +859,7 @@ input {
 }
 
 /* Back-to-top button end */
-/* Accessibility widget */
+/* Accessibility widget start */
 #accessibilityBar {
   position: fixed;
   bottom: 0.5rem;
@@ -874,9 +870,8 @@ input {
   background-color: var(--color-white);
   border: 3px solid var(--color-primary-light);
   border-radius: 5px;
-  box-shadow: 0 5px 5px rgba(34, 34, 34, 0);
   z-index: 9998;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, box-shadow 0.25s ease-in-out 0.25s;
 }
 #accessibilityBar button {
   padding: 0.5em;
@@ -887,7 +882,7 @@ input {
   transition: background-color 0.25s ease-in-out;
 }
 #accessibilityBar button:hover {
-  background-color: var(--color-secondary-light);
+  background-color: var(--color-secondary);
 }
 #accessibilityBar button:not(:last-child)::after {
   content: "";
@@ -897,6 +892,11 @@ input {
   height: 3px;
   width: 100%;
   background-color: var(--color-primary-light);
+}
+
+#accessibilityBar.active {
+  transform: translateX(0);
+  box-shadow: 0 5px 15px 10px rgba(34, 34, 34, 0.2);
 }
 
 body.accessibility_readingLine #readingLine {
@@ -921,6 +921,14 @@ body.accessibility_markerLine #markerLine {
   z-index: 9999;
 }
 
+body.contrast * {
+  background-color: #000 !important;
+  color: #e4fd00 !important;
+  fill: #e4fd00 !important;
+  stroke: #e4fd00 !important;
+}
+
+/* Accessibility widget end */
 /* Components end */
 /* Hamburger menu animation */
 /* Card animation */
@@ -1022,7 +1030,7 @@ body.accessibility_markerLine #markerLine {
   transition: color 0.25s ease-in-out;
 }
 .header__nav-link:hover {
-  color: var(--color-primary-light);
+  color: var(--color-secondary);
 }
 .header__nav-link::before {
   content: "";
@@ -1061,6 +1069,10 @@ body.accessibility_markerLine #markerLine {
 }
 .header__search svg {
   stroke: var(--color-primary);
+}
+.header__weather img {
+  width: 3rem;
+  aspect-ratio: 1;
 }
 .header__weather p {
   font-size: 0.875rem;
@@ -1495,7 +1507,7 @@ body.accessibility_markerLine #markerLine {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 1.5rem;
+  gap: 3rem;
   margin-top: -30vh;
   z-index: 5;
 }
@@ -1505,8 +1517,6 @@ body.accessibility_markerLine #markerLine {
   .hero__background-container {
     background-attachment: fixed;
   }
-}
-@media screen and (min-width: 65em) {
   .hero__card-container {
     position: absolute;
     bottom: 5%;
@@ -1534,7 +1544,6 @@ body.accessibility_markerLine #markerLine {
 @media screen and (min-width: 65em) {
   .welcome__content-wrapper {
     flex-wrap: nowrap;
-    gap: 2rem;
   }
 }
 /* Welcome section styling end */
@@ -1544,7 +1553,7 @@ body.accessibility_markerLine #markerLine {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
+  gap: 3rem;
 }
 
 /* Media quries for news section */
@@ -1563,7 +1572,7 @@ body.accessibility_markerLine #markerLine {
   overflow: hidden;
 }
 .meetings iframe {
-  aspect-ratio: 4/2;
+  aspect-ratio: 4/3;
 }
 .meetings__swiper-button-prev, .meetings__swiper-button-next {
   position: absolute;
@@ -1578,6 +1587,12 @@ body.accessibility_markerLine #markerLine {
   right: 5%;
 }
 
+/* Media queries for meetings section */
+@media screen and (min-width: 40em) {
+  .meetings iframe {
+    aspect-ratio: 4/2;
+  }
+}
 /* Meetings section styling end */
 /* Events section styling start */
 .events__content-wrapper {
@@ -1806,11 +1821,10 @@ body.accessibility_markerLine #markerLine {
 .footer__link {
   padding: 0.25rem;
   color: var(--color-white);
-  transition: background-color 0.25s ease-in-out;
+  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
 }
 .footer__link:hover {
-  border-radius: 1px;
-  background-color: var(--color-primary-extra-light);
+  color: var(--color-secondary);
 }
 
 /* Media queries for footer */

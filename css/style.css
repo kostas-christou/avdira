@@ -874,6 +874,10 @@ input {
   transition: transform 0.5s ease-in-out, box-shadow 0.25s ease-in-out 0.25s;
 }
 #accessibilityBar button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
   padding: 0.5em;
   border: none;
   background-color: transparent;
@@ -926,6 +930,13 @@ body.contrast * {
   color: #e4fd00 !important;
   fill: #e4fd00 !important;
   stroke: #e4fd00 !important;
+}
+
+.accessibility-item-icon {
+  display: inline-block;
+  margin-right: 0.5em;
+  fill: var(--color-primary);
+  fill: red;
 }
 
 /* Accessibility widget end */

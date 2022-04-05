@@ -363,11 +363,15 @@ const meetingsSwiper = new Swiper('.meetings__swiper', {
       spaceBetween: 30,
     },
     1350: {
-      slidesPerView: 1.4,
+      slidesPerView: 2.4,
       spaceBetween: 40,
     },
-    2200: {
-      slidesPerView: 2.4,
+    1950: {
+      slidesPerView: 3.4,
+      spaceBetween: 50,
+    },
+    2550: {
+      slidesPerView: 4.4,
       spaceBetween: 60,
     },
   },

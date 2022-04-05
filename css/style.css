@@ -881,6 +881,8 @@ input {
   padding: 0.5em;
   border: none;
   background-color: transparent;
+  font-weight: 700;
+  text-transform: capitalize;
   cursor: pointer;
   position: relative;
   transition: background-color 0.25s ease-in-out;

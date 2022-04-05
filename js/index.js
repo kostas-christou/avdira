@@ -13,11 +13,120 @@ const mediaQueryMax1366 = window.matchMedia('(max-width: 85.374em)');
 const mediaQueryMin1366 = window.matchMedia('(min-width: 85.375em)');
 const weatherTemp = document.querySelector('.header__weather-temp');
 const weatherIcon = document.querySelector('.header__weather-icon');
+const accessBtn = document.getElementById('universalAccessBtn');
+const cookies = document.querySelector('.cookies');
+const refuseBtn = document.querySelector('.cookies__btn--refuse');
+const acceptBtn = document.querySelector('.cookies__btn--accept');
+
+// Helper fuctions for reusability
+
+// Function for changing the ham-menu icon
+function toggleHamMenuIcon() {
+  if (hamMenu.classList.contains('header__ham-menu--open')) {
+    hamMenu.classList.remove('header__ham-menu--open');
+    hamMenu.classList.add('header__ham-menu--close');
+  } else {
+    hamMenu.classList.remove('header__ham-menu--close');
+    hamMenu.classList.add('header__ham-menu--open');
+  }
+}
+
+// Function for hiding the currently open left menu (if any)
+function hideCurrentLeftMenu() {
+  const openLeftMenu = document.querySelector(
+    '.full-menu--left.full-menu--expand'
+  );
+  if (openLeftMenu) {
+    openLeftMenu.classList.remove('full-menu--expand');
+    openLeftMenu.classList.add('full-menu--collapse');
+  }
+}
+// Function for showing the new left menu
+function showNewLeftMenu(menuIndex) {
+  if (fullMenusLeft[menuIndex]) {
+    fullMenusLeft[menuIndex].classList.remove('full-menu--collapse');
+    fullMenusLeft[menuIndex].classList.add('full-menu--expand');
+  }
+}
+
+// Function for showing the overlay
+function showOverlay() {
+  fullMenuOverlay.classList.remove('disappear');
+  fullMenuOverlay.classList.add('appear');
+}
+
+// Function for hiding the overlay
+function hideOverlay() {
+  fullMenuOverlay.classList.remove('appear');
+  fullMenuOverlay.classList.add('disappear');
+}
+
+// Function for showing the right menu
+function showRightMenu() {
+  fullMenuRight.classList.remove('full-menu--collapse');
+  fullMenuRight.classList.add('full-menu--expand');
+}
+
+// Function for hiding the right menu
+function hideRightMenu() {
+  fullMenuRight.classList.remove('full-menu--expand');
+  fullMenuRight.classList.add('full-menu--collapse');
+}
+
+// Function for adding an underline on the current active link, after removing the previous one (if any)
+function addLinkUnderline(menuIndex) {
+  const previousActiveLink = document.querySelector('.current');
+  if (previousActiveLink) {
+    previousActiveLink.classList.remove('current');
+  }
+  if (expandLinks[menuIndex]) {
+    expandLinks[menuIndex].classList.add('current');
+  }
+}
+
+// Function for removing the underline on the current active link (if any)
+function removeLinkUnderline() {
+  const previousActiveLink = document.querySelector('.current');
+  if (previousActiveLink) {
+    previousActiveLink.classList.remove('current');
+  }
+}
+
+// Function for hiding the accessibility menu
+function hideAccessibilityMenu() {
+  const accessibilityMenu = document.getElementById('accessibilityBar');
+  accessibilityMenu.classList.remove('active');
+}
+
+// Function for showing the right aside on small screens
+function showRightAside() {
+  if (mediaQueryMax880.matches) {
+    asideRight.style.transform = 'translateX(0)';
+  }
+}
+
+// Function for hiding the right aside on small screens
+function hideRightAside() {
+  if (mediaQueryMax880.matches) {
+    asideRight.style.transform = 'translateX(100%)';
+  }
+}
+
+// Cookies buttons functionality
+if (acceptBtn && refuseBtn) {
+  acceptBtn.addEventListener('click', () => {
+    cookies.style.display = 'none';
+  });
+
+  refuseBtn.addEventListener('click', () => {
+    cookies.style.display = 'none';
+  });
+}
 
 // Fetch weather info from external API (weatherapi.com)
 document.addEventListener('DOMContentLoaded', async () => {
   const response = await axios.get(
-    'http://api.weatherapi.com/v1/current.json?key=92eab374f8c14f52bb4115634221403&q=40.981473,84.95146'
+    'http://api.weatherapi.com/v1/current.json?key=92eab374f8c14f52bb4115634221403&q=40.981473,24.95146'
   );
 
   weatherIcon.src = `${response.data.current.condition.icon}`;
@@ -26,152 +135,60 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Functionality for mega menu both for mobile and desktop
 function openDesktopMenu(menuIndex = 0) {
-  // Change the hamburger menu icon
-  hamMenu.classList.remove('header__ham-menu--open');
-  hamMenu.classList.add('header__ham-menu--close');
-  // Hide the current open left part of the full menu (if any)
-  const openLeftMenu = document.querySelector(
-    '.full-menu--left.full-menu--expand'
-  );
-  if (openLeftMenu) {
-    openLeftMenu.classList.remove('full-menu--expand');
-    openLeftMenu.classList.add('full-menu--collapse');
-  }
-  // Show the new left part of the full menu
-  fullMenusLeft[menuIndex].classList.remove('full-menu--collapse');
-  fullMenusLeft[menuIndex].classList.add('full-menu--expand');
-  // Show the right part of the full menu
-  fullMenuRight.classList.remove('full-menu--collapse');
-  fullMenuRight.classList.add('full-menu--expand');
-  // Show the overlay
-  fullMenuOverlay.classList.remove('disappear');
-  fullMenuOverlay.classList.add('appear');
-  // Add an underline on the current active link, after removing the previous one (if any)
-  const previousActiveLink = document.querySelector('.current');
-  if (previousActiveLink) {
-    previousActiveLink.classList.remove('current');
-  }
-  expandLinks[menuIndex].classList.add('current');
+  toggleHamMenuIcon();
+  hideCurrentLeftMenu();
+  showNewLeftMenu(menuIndex);
+  showRightMenu();
+  showOverlay();
+  addLinkUnderline(menuIndex);
 }
 
 function closeDesktopMenu(menuIndex = 0) {
-  // Change the hamburger menu icon
-  hamMenu.classList.remove('header__ham-menu--close');
-  hamMenu.classList.add('header__ham-menu--open');
-  // Hide the left part of the full menu
-  const openLeftMenu = document.querySelector(
-    '.full-menu--left.full-menu--expand'
-  );
-  if (openLeftMenu) {
-    openLeftMenu.classList.remove('full-menu--expand');
-    openLeftMenu.classList.add('full-menu--collapse');
-  }
-  // Hide the right part of the full menu
-  fullMenuRight.classList.remove('full-menu--expand');
-  fullMenuRight.classList.add('full-menu--collapse');
-  // Hide the accessibility menu
-  const accessibilityMenu = document.getElementById('accessibilityBar');
-  accessibilityMenu.classList.remove('active');
-
-  // Hide the overlay
-  fullMenuOverlay.classList.remove('appear');
-  fullMenuOverlay.classList.add('disappear');
-  // Remove the underline on the previous active link (if any)
-  const previousActiveLink = document.querySelector('.current');
-  if (previousActiveLink) {
-    previousActiveLink.classList.remove('current');
-  }
+  toggleHamMenuIcon();
+  hideCurrentLeftMenu();
+  hideRightMenu();
+  hideAccessibilityMenu();
+  hideOverlay();
+  removeLinkUnderline();
   // Add pointer events for the rest of the document
   parallaxWrapper.style.pointerEvents = 'auto';
 }
 
 function openMobileMenu(menuIndex = 0) {
-  // Change the hamburger menu icon
-  hamMenu.classList.remove('header__ham-menu--open');
-  hamMenu.classList.add('header__ham-menu--close');
-  // For small screens show the right aside
-  if (mediaQueryMax880.matches) {
-    asideRight.style.transform = 'translateX(0)';
-  }
-  // Show the overlay
-  // fullMenuOverlay.classList.remove('disappear');
-  // fullMenuOverlay.classList.add('appear');
+  toggleHamMenuIcon();
+  showRightAside();
+  showOverlay();
+  showRightMenu();
   // For small screens show the header navbar as expandable
   headerNav.style.transform = 'translateX(0)';
-  // Show the right part of the full menu
-  fullMenuRight.classList.remove('full-menu--collapse');
-  fullMenuRight.classList.add('full-menu--expand');
   // Remove pointer events for the rest of the document
   parallaxWrapper.style.pointerEvents = 'none';
 }
 
 function closeMobileMenu(menuIndex = 0) {
-  // Change the hamburger menu icon
-  hamMenu.classList.remove('header__ham-menu--close');
-  hamMenu.classList.add('header__ham-menu--open');
-  // For small screens hide the right aside
-  if (mediaQueryMax880.matches) {
-    asideRight.style.transform = 'translateX(100%)';
-  }
-  // Hhide the header navbar
+  toggleHamMenuIcon();
+  hideRightAside();
+  hideCurrentLeftMenu();
+  hideRightMenu();
+  hideAccessibilityMenu();
+  hideOverlay();
+  // Hide the header navbar
   headerNav.style.transform = 'translateX(calc(100% + var(--header-height)))';
-  // Hide the left part of the full menu
-  const openLeftMenu = document.querySelector(
-    '.full-menu--left.full-menu--expand'
-  );
-  if (openLeftMenu) {
-    openLeftMenu.classList.remove('full-menu--expand');
-    openLeftMenu.classList.add('full-menu--collapse');
-  }
-  // Hide the right part of the full menu
-  fullMenuRight.classList.remove('full-menu--expand');
-  fullMenuRight.classList.add('full-menu--collapse');
-  // Hide the accessibility menu
-  const accessibilityMenu = document.getElementById('accessibilityBar');
-  accessibilityMenu.classList.remove('active');
-  // Hide the overlay
-  // fullMenuOverlay.classList.remove('appear');
-  // fullMenuOverlay.classList.add('disappear');
   // Add pointer events for the rest of the document
   parallaxWrapper.style.pointerEvents = 'auto';
 }
 
 function openInternalMobileMenu(menuIndex = 0) {
+  showRightAside();
+  hideCurrentLeftMenu();
+  showNewLeftMenu(menuIndex);
+  showRightMenu();
+  addLinkUnderline(menuIndex);
   // Change the hamburger menu icon
   hamMenu.classList.remove('header__ham-menu--open');
   hamMenu.classList.add('header__ham-menu--close');
-  // For small screens show the right aside
-  if (mediaQueryMax880.matches) {
-    asideRight.style.transform = 'translateX(0)';
-  }
   // Hide the main nav menu on small screens
   headerNav.style.transform = 'translateX(calc(100% + var(--header-height)))';
-  // Hide the current open left part of the full menu (if any)
-  const openLeftMenu = document.querySelector(
-    '.full-menu--left.full-menu--expand'
-  );
-  if (openLeftMenu) {
-    openLeftMenu.classList.remove('full-menu--expand');
-    openLeftMenu.classList.add('full-menu--collapse');
-  }
-  // Show the overlay
-  // fullMenuOverlay.classList.remove('disappear');
-  // fullMenuOverlay.classList.add('appear');
-  // Show the new left part of the full menu
-  fullMenusLeft[menuIndex].classList.remove('full-menu--collapse');
-  fullMenusLeft[menuIndex].classList.add('full-menu--expand');
-
-  // Show the right part of the full menu
-  fullMenuRight.classList.remove('full-menu--collapse');
-  fullMenuRight.classList.add('full-menu--expand');
-
-  // Add an underline on the current active link, after removing the previous one (if any)
-  const previousActiveLink = document.querySelector('.current');
-  if (previousActiveLink) {
-    previousActiveLink.classList.remove('current');
-  }
-  expandLinks[menuIndex].classList.add('current');
-  parallaxWrapper.style.pointerEvents = 'none';
 }
 
 // Hamburger menu event-listener
@@ -186,7 +203,7 @@ if (hamMenu) {
       openDesktopMenu();
     } else if (
       mediaQueryMin1366.matches &&
-      !hamMenu.classList.contains('header__ham-menu--open')
+      hamMenu.classList.contains('header__ham-menu--close')
     ) {
       closeDesktopMenu();
       // Small screens
@@ -197,7 +214,7 @@ if (hamMenu) {
       openMobileMenu();
     } else if (
       mediaQueryMax1366.matches &&
-      !hamMenu.classList.contains('header__ham-menu--open')
+      hamMenu.classList.contains('header__ham-menu--close')
     ) {
       closeMobileMenu();
     }
@@ -212,6 +229,8 @@ if (expandLinks.length > 0) {
       // Large screens
       if (mediaQueryMin1366.matches) {
         openDesktopMenu(index);
+        hamMenu.classList.remove('header__ham-menu--open');
+        hamMenu.classList.add('header__ham-menu--close');
         // Small screens
       } else if (mediaQueryMax1366.matches) {
         openInternalMobileMenu(index);
@@ -255,6 +274,8 @@ document.addEventListener('click', (e) => {
     !headerNav.contains(e.target)
   ) {
     closeMobileMenu();
+    hamMenu.classList.remove('header__ham-menu--close');
+    hamMenu.classList.add('header__ham-menu--open');
   }
 });
 
@@ -337,7 +358,7 @@ const meetingsSwiper = new Swiper('.meetings__swiper', {
   spaceBetween: 20,
   grabCursor: true,
   breakpoints: {
-    1040: {
+    720: {
       slidesPerView: 1.4,
       spaceBetween: 30,
     },
@@ -361,17 +382,21 @@ const quickAccessSwiper = new Swiper('.quick-access__swiper', {
   spaceBetween: 20,
   grabCursor: true,
   breakpoints: {
-    1040: {
-      slidesPerView: 1.5,
-      spaceBetween: 20,
-    },
-    1350: {
-      slidesPerView: 2.5,
+    720: {
+      slidesPerView: 1.4,
       spaceBetween: 30,
     },
-    1850: {
-      slidesPerView: 3.5,
+    1150: {
+      slidesPerView: 2.4,
+      spaceBetween: 40,
+    },
+    1550: {
+      slidesPerView: 3.4,
       spaceBetween: 50,
+    },
+    2000: {
+      slidesPerView: 4.4,
+      spaceBetween: 60,
     },
   },
   navigation: {
@@ -385,16 +410,20 @@ const civilProtectionSwiper = new Swiper('.civil-protection__swiper', {
   spaceBetween: 20,
   grabCursor: true,
   breakpoints: {
-    1040: {
-      slidesPerView: 1.5,
+    720: {
+      slidesPerView: 1.4,
       spaceBetween: 20,
     },
-    1350: {
-      slidesPerView: 2.5,
+    1150: {
+      slidesPerView: 2.4,
       spaceBetween: 30,
     },
-    1850: {
-      slidesPerView: 3.5,
+    1550: {
+      slidesPerView: 3.4,
+      spaceBetween: 50,
+    },
+    2000: {
+      slidesPerView: 4.4,
       spaceBetween: 50,
     },
   },

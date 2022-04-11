@@ -1625,7 +1625,7 @@ body.contrast * {
   align-items: center;
   gap: 1.5rem;
   width: 100%;
-  margin-top: -1rem;
+  margin-top: -0.5rem;
 }
 .events__img-wrapper {
   min-height: 15rem;

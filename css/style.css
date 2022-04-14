@@ -26,8 +26,8 @@
   --pad-block-large: 9rem;
   --pad-block-xl: 15rem;
   /* Elements height variables */
-  --header-height: 3.5rem;
-  --footer-height: 50vh;
+  --header-height: clamp(3.5rem, 3.2rem + 1.5vw, 5rem);
+  --footer-height: calc(60vh - var(--header-height));
   /* Breakpoints for media queries */
   /*
   bp-640px: 40em 
@@ -38,17 +38,6 @@
   */
 }
 
-@media screen and (min-width: 40em) {
-  :root {
-    --header-height: 4rem;
-  }
-}
-@media screen and (min-width: 85.375em) {
-  :root {
-    --header-height: 5rem;
-    --footer-height: 50vh;
-  }
-}
 /* Global reset */
 *,
 *::before,
@@ -144,6 +133,8 @@ img {
 
 iframe {
   border: 0;
+  display: block;
+  max-width: 100%;
 }
 
 button,
@@ -157,6 +148,30 @@ input {
   color: var(--color-primary);
 }
 
+.main {
+  position: relative;
+  z-index: 1;
+  background-color: var(--color-white);
+}
+
+.parallax-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Media queries for parallax wrapper  */
+@media screen and (min-width: 55em) {
+  .parallax-wrapper {
+    height: 100%;
+    width: calc(100% - var(--header-height) * 2);
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0 auto;
+  }
+}
 /* General styling properties and typography end */
 /* Utility classes start */
 .home-container-center,
@@ -216,65 +231,6 @@ input {
 }
 
 /* Utility classes end */
-/* Home page general layout start */
-.header {
-  position: fixed;
-  inset: 0;
-  height: var(--header-height);
-  z-index: 100;
-}
-
-.aside, .aside--right, .aside--left {
-  position: fixed;
-  top: var(--header-height);
-  bottom: 0;
-  width: var(--header-height);
-  background-color: var(--color-white);
-  transition: transform 0.5s ease-in-out;
-}
-.aside--left {
-  display: none;
-}
-.aside--right {
-  right: 0;
-  z-index: 101;
-  transform: translateX(100%);
-}
-
-.main {
-  position: relative;
-  z-index: 1;
-  background-color: var(--color-white);
-}
-
-.parallax-wrapper {
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  position: relative;
-}
-
-/* Media queries for layouts */
-@media screen and (min-width: 55em) {
-  .parallax-wrapper {
-    height: 100%;
-    width: calc(100% - var(--header-height) * 2);
-    overflow-x: hidden;
-    overflow-y: auto;
-    margin: 0 auto;
-  }
-
-  .aside--left {
-    display: block;
-    left: 0;
-    z-index: 80;
-  }
-  .aside--right {
-    transform: translateX(0);
-  }
-}
-/* Home page general layout end */
 /* Components start */
 /* Buttons start */
 /* Sliding-button start */
@@ -995,8 +951,12 @@ body.contrast * {
   align-items: center;
   gap: 0.5rem;
   padding-block: 1rem;
+  position: fixed;
+  inset: 0;
+  height: var(--header-height);
   background-color: var(--color-white);
   box-shadow: 0 1px 10px 0 var(--color-grey-light);
+  z-index: 100;
 }
 .header__logo-container {
   display: flex;
@@ -1226,7 +1186,8 @@ body.contrast * {
   left: 0;
   bottom: 0;
   right: var(--header-height);
-  background-color: var(--color-secondary-light);
+  background-color: var(--color-white);
+  opacity: 0;
   z-index: 97;
 }
 .full-menu--collapse.full-menu--left {
@@ -1424,7 +1385,7 @@ body.contrast * {
     background-color: var(--color-white);
   }
   .full-menu__overlay {
-    background-color: var(--color-white);
+    opacity: 1;
   }
   .full-menu--collapse.full-menu--left {
     transform: translateY(calc(-100% - var(--header-height)));
@@ -1452,7 +1413,21 @@ body.contrast * {
 }
 /* Expandable menu styling end */
 /* Aside nav right styling start */
+.aside, .aside--right, .aside--left {
+  position: fixed;
+  top: var(--header-height);
+  bottom: 0;
+  width: var(--header-height);
+  background-color: var(--color-white);
+  transition: transform 0.5s ease-in-out;
+}
+.aside--left {
+  display: none;
+}
 .aside--right {
+  right: 0;
+  z-index: 101;
+  transform: translateX(100%);
   box-shadow: 1px 0 8px 0 var(--color-grey-light);
 }
 .aside__nav-list {
@@ -1489,8 +1464,8 @@ body.contrast * {
 .aside__login {
   margin-bottom: 5vh;
 }
-.aside__youtube {
-  margin-bottom: 10vh;
+.aside__twitter {
+  margin-bottom: 8vh;
 }
 .aside__accessibility button {
   border: none;
@@ -1498,6 +1473,17 @@ body.contrast * {
   cursor: pointer;
 }
 
+/* Media queries for aside */
+@media screen and (min-width: 55em) {
+  .aside--left {
+    display: block;
+    left: 0;
+    z-index: 80;
+  }
+  .aside--right {
+    transform: translateX(0);
+  }
+}
 /* Aside nav right styling end */
 /* Hero section styling start */
 .hero {
@@ -1561,20 +1547,23 @@ body.contrast * {
 }
 /* Welcome section styling end */
 /* News section styling start */
-.news__content-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
+.news__slider {
+  position: relative;
+  overflow: hidden;
+}
+.news__swiper-button-prev, .news__swiper-button-next {
+  position: absolute;
+  top: 2%;
+  z-index: 10;
+}
+.news__swiper-button-prev {
+  left: 1%;
+}
+.news__swiper-button-next {
+  right: 1%;
 }
 
 /* Media quries for news section */
-@media screen and (min-width: 65em) {
-  .news__content-wrapper {
-    flex-direction: row;
-  }
-}
 /* News section styling end */
 /* Meetings section styling start */
 .meetings__intro-wrapper {
@@ -1603,7 +1592,7 @@ body.contrast * {
 /* Media queries for meetings section */
 @media screen and (min-width: 40em) {
   .meetings iframe {
-    aspect-ratio: 4/2;
+    aspect-ratio: 4/2.5;
   }
 }
 /* Meetings section styling end */
@@ -1764,7 +1753,6 @@ body.contrast * {
 }
 /* Footer styling start */
 .footer {
-  min-height: calc(100vh - var(--header-height));
   padding-block: 2rem var(--header-height);
   background-color: var(--color-primary);
 }

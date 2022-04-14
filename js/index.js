@@ -353,8 +353,36 @@ calendarBody.addEventListener('click', (e) => {
 });
 
 // Swiper (slider) config
+const newsSwiper = new Swiper('.news__swiper', {
+  slidesPerView: 1.15,
+  spaceBetween: 20,
+  grabCursor: true,
+  breakpoints: {
+    720: {
+      slidesPerView: 1.4,
+      spaceBetween: 30,
+    },
+    1150: {
+      slidesPerView: 2.4,
+      spaceBetween: 40,
+    },
+    1550: {
+      slidesPerView: 3.4,
+      spaceBetween: 50,
+    },
+    2000: {
+      slidesPerView: 4.4,
+      spaceBetween: 60,
+    },
+  },
+  navigation: {
+    nextEl: '.news__swiper-button-next',
+    prevEl: '.news__swiper-button-prev',
+  },
+});
+
 const meetingsSwiper = new Swiper('.meetings__swiper', {
-  slidesPerView: 1,
+  slidesPerView: 1.15,
   spaceBetween: 20,
   grabCursor: true,
   breakpoints: {
@@ -370,7 +398,7 @@ const meetingsSwiper = new Swiper('.meetings__swiper', {
       slidesPerView: 3.4,
       spaceBetween: 50,
     },
-    2550: {
+    2750: {
       slidesPerView: 4.4,
       spaceBetween: 60,
     },
@@ -382,7 +410,7 @@ const meetingsSwiper = new Swiper('.meetings__swiper', {
 });
 
 const quickAccessSwiper = new Swiper('.quick-access__swiper', {
-  slidesPerView: 1,
+  slidesPerView: 1.15,
   spaceBetween: 20,
   grabCursor: true,
   breakpoints: {
@@ -410,7 +438,7 @@ const quickAccessSwiper = new Swiper('.quick-access__swiper', {
 });
 
 const civilProtectionSwiper = new Swiper('.civil-protection__swiper', {
-  slidesPerView: 1,
+  slidesPerView: 1.15,
   spaceBetween: 20,
   grabCursor: true,
   breakpoints: {
